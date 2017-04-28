@@ -1,0 +1,41 @@
+{% macro loop(page) %}
+    {% for p in page.children.visible %}
+        {% set current_page = (p.active or p.activeChild) ? 'item--current' : '' %}
+        {% if p.children.visible.count > 0 %}
+            <li class="has-children {{ current_page }}">
+                <a href="{{ p.url }}">
+                    {{ p.menu }}
+                </a>
+                <ul>
+                    {{ _self.loop(p) }}
+                </ul>
+            </li>
+        {% else %}
+            <li class="{{ current_page }}">
+                <a href="{{ p.url }}">
+                    {{ p.menu }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+{% if theme_config.dropdown.enabled %}
+    {{ _self.loop(pages) }}
+{% else %}
+    {% for page in pages.children.visible %}
+        {% set current_page = (page.active or page.activeChild) ? 'item--current' : '' %}
+        <li class="item--{{ page.slug }} {{ current_page }}">
+            <a href="{{ page.url }}">
+                {{ page.menu }}
+            </a>
+        </li>
+    {% endfor %}
+{% endif %}
+{% for mitem in site.menu %}
+    <li class="item--{{ mitem.text }}">
+        <a href="{{ mitem.url }}">
+            {{ mitem.text }}
+        </a>
+    </li>
+{% endfor %}

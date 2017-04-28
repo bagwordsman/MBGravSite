@@ -1,0 +1,11 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    <div class="wrapper">
+        <div class="half__centered content">
+            <h1>404 - Not Found</h1>
+            <p>The requested url <span id="url">{{ uri.path }}</span> was not found on this website.</p>
+            <p><a href="{{ base_url_relative }}">Click here to return to the homepage.</a></p>
+        </div>
+    </div>
+{% endblock %}

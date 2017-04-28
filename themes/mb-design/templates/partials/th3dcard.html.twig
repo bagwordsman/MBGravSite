@@ -1,0 +1,44 @@
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+<!DOCTYPE html>
+<html lang="{{ grav.language.getActive ?: theme_config.default_lang }}">
+<head>
+{% block head %}
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'partials/metadata.html.twig' %}
+
+    <link rel="icon" type="image/x-icon" href="{{ url('theme://images/assets/mb-icon.ico') }}" rel="Shortcut Icon"/>
+    <link href="img/assets/Apple-Touch-Icon-57x57.png" rel="Apple Touch Icon">
+    <link href="img/assets/Apple-Touch-Icon-144x144.png" rel="Apple Touch Icon">
+    <link rel="canonical" href="{{ page.url(true, true) }}" />
+
+    {% block stylesheets %}
+        {% do assets.addCss('theme://css/style.css', 100) %}
+        {% do assets.addCss('theme://css/th.css', 99) %}
+    {% endblock %}
+    {{ assets.css() }}
+
+    {% block javascripts %}
+        {% do assets.addJs('https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.js', {'priority':103, 'group':'bottom'}) %}
+        {% do assets.addJs('theme://js/lib/OrbitControls.js', {'priority':102, 'group':'bottom'}) %}
+        {% do assets.addJs('https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js', {'priority':101, 'group':'bottom'}) %}
+        {% do assets.addJs('theme://js/th-card-test_9.js', {'priority':100, 'group':'bottom'}) %}
+    {% endblock %}
+    {{ assets.js() }}
+
+{% endblock head%}
+</head>
+<body class="{{ page.header.body_classes }}">
+
+{% block body %}
+    {% block content %}{% endblock %}
+{% endblock %}
+
+{% block bottom %}
+    {{ assets.js('bottom') }}
+{% endblock %}
+
+</body>
+</html>

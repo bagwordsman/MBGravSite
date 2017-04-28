@@ -1,0 +1,173 @@
+{% extends 'partials/base.html.twig' %}
+{% block content %}
+
+{# split page content with --- or <hr/> tag - defined in page admin panel #}
+{% set content = page.content|split('<hr />') %}
+
+    <div class="wrapper__headline">
+        {# Heading does not need to be wrapped in <h1> tags. This is done in page admin panel #}
+        {{ content[0] }}
+    </div>
+
+    {# markdown="1" allows html to be entered in the page - as a last resort #}
+    <div class="wrapper vh" markdown="1">
+        <div class="half__left">
+            {# main content #}
+            {{ content[1]|replace({'<p>' : '<p class="lg">'}) }}
+        </div>
+
+    {# featured or latest project #}
+    {# 1 - loop through projects in the 'featured' category #}
+    {% for project in taxonomy.findTaxonomy({'category':'featured'}) %}
+
+        {# 2 - get project thumbnail #}
+        {% set projectcontent = project.content|split('<hr />') %}
+        {% set projectsection = projectcontent[0]|split('\n') %}{# split at line break #}
+        {% set thumbnail = projectsection[1]|striptags('<img>') %}
+        {# break into an array #}
+        {% set thumbpart = thumbnail|split('"') %}
+
+        {# 3 - get project metadata #}
+        {% set projectmeta = project.header.metadata %}
+
+        {# 4 - compose project thumbnail #}
+        <div class="half__right thumbnail" style="background-image:url('{% for part in thumbpart %}{% if part|contains('jpg') %}{{ part }}{% endif %}{% endfor %}')">
+            <a class="overlay" href="work/{{ project.slug }}" {# need to avoid hard coding url #} style="background-color:#{{ projectmeta.color }}">
+                {# anchor links must contain text for accessibility purposes #}
+                {% if projectsection[2] or projectsection[3] %}
+                <div class="assistive-text">
+                    <span class="h2">{{ projectsection[2]|striptags }}</span>
+                    <span class="p">{{ projectsection[3]|striptags }}</span>
+                </div>
+                {% endif %}
+            </a>
+            <div class="info{% if project.inverseThumbnail == 'yes' %} info--inverse{% endif %}">
+                <p class="featured">Latest Work:</p>
+                {{ projectsection[2]|replace({'<h2>' : '<h2 class="title">', '<h3>' : '<h2 class="title">'}) }}
+                {{ projectsection[3]|replace({'<p>' : '<p class="description">'}) }}
+                <p class="view">View Project</p>
+            </div>
+        </div>
+
+    {% endfor %}
+    {# end featured project loop #}
+
+    </div>
+
+{% endblock %}
+
+
+{# ---------------------------------------- #}
+{# show thumbnails for work and about pages #}
+{% block secondary %}
+<div id="secondary" role="complementary">
+
+  {# 1 - loop through pages #}
+  {% for p in page.collection %}
+  {# dump(p) #}
+
+  {# 2 - if page is work or about page, run the code #}
+  {% set pageslug = p.slug %}
+  {% if pageslug in ['work' , 'about'] %}
+
+  {# 3 - get thumnail and content #}
+  {% set pagecontent = p.content|split('<hr />') %}
+  {% set pagesection = pagecontent[0]|split('\n') %}{# split at line break #}
+  {% set thumbnail = pagesection[0]|striptags('<img>') %}{# get image (1st item in array) #}
+  {# break into an array #}
+  {% set rectangethumbpart = thumbnail|split('"') %}
+
+  {# 4 - styling - via page meta #}
+  {% set pagemeta = p.header.metadata %}
+
+  {# if thumbnail image exists, display thumbnail + content #}
+  {% if rectangethumbpart %}
+  <div class="wrapper__whole thumbnail" style="background-image:url('{% for part in rectangethumbpart %}{% if part|contains('jpg') %}{{ part }}{% endif %}{% endfor %}'){% if pagemeta.footerThumbnailPosY %};background-position-y:{{pagemeta.footerThumbnailPosY}}%{% endif %}">
+      <a class="overlay" href="{{ pageslug }}" style="background-color:#{{ pagemeta.color }}">
+          {# anchor links must contain text for accessibility purposes #}
+          {% if pagesection[1] or pagesection[2] or pagesection[3] %}
+          <div class="assistive-text">
+              <span class="h2">{{ pagesection[1]|striptags }}</span>
+              <span class="p">
+                  {% if pagesection[3]|length > 30 %}{{ pagesection[3]|striptags }}
+                  {% else %}{{ pagesection[2]|striptags }}
+                  {% endif %}
+              </span>
+          </div>
+          {% endif %}
+      </a>
+      <div class="info{% if pagemeta.inverseThumbnail == 'yes' %} info--inverse{% endif %}">
+          {{ pagesection[1]|replace({'<h2>' : '<h2 class="title">'}) }}
+          {# if the longer description is available, use it #}
+          <p class="description">
+          {% if pagesection[3]|length > 30 %}{{ pagesection[3]|striptags }}
+          {% else %}{{ pagesection[2]|striptags }}
+          {% endif %}
+          </p>
+      </div>
+  </div>
+  {% endif %}
+
+  {% endif %}{# pageslug conditional #}
+  {% endfor %}
+</div>
+{% endblock %}
+
+
+{# ---------------------------------------- #}
+{# selected project thumbnails #}
+{% block tertiary %}
+
+{# if third section in page content exists (a.k.a. selected projects heading), add selected projects #}
+{% set content = page.content|split('<hr />') %}
+{% if content[2] %}
+<div id="tertiary" role="complementary">
+
+    <div class="wrapper__headline headline--work">
+        {{ content[2] }}
+    </div>
+
+    <div class="wrapper">
+
+    {# selected project #}
+    {# 1 - loop through projects in the 'selected' category #}
+    {% for project in taxonomy.findTaxonomy({'category':'selected'}) %}
+
+        {# 2 - get project thumbnail #}
+        {% set projectcontent = project.content|split('<hr />') %}
+        {% set projectsection = projectcontent[0]|split('\n') %}{# split at line break #}
+        {% set thumbnail = projectsection[1]|striptags('<img>') %}
+        {# break into an array #}
+        {% set thumbpart = thumbnail|split('"') %}
+
+        {# 3 - get project metadata #}
+        {% set projectmeta = project.header.metadata %}
+
+        {# 4 - compose project thumbnail #}
+        <div class="{% if loop.index0 is odd %}half__right{% elseif loop.index0 is even %}half__left{% endif %} thumbnail" style="background-image:url('{% for part in thumbpart %}{% if part|contains('jpg') %}{{ part }}{% endif %}{% endfor %}')">
+            {# best to add url rather than slug here - this may differ. Slug can be changed in page editor #}
+            <a class="overlay" href="work/{{ project.slug }}" {# need to avoid hard coding url #} style="background-color:#{{ projectmeta.color }}">
+                {# anchor links must contain text for accessibility purposes #}
+                {% if projectsection[2] or projectsection[3] %}
+                <div class="assistive-text">
+                    <span class="h4">{{ projectsection[2]|striptags }}</span>
+                    <span class="p">{{ projectsection[3]|striptags }}</span>
+                </div>
+                {% endif %}
+            </a>
+            <div class="info{% if projectmeta.inverseThumbnail == 'yes' %} info--inverse{% endif %}">
+                {{ projectsection[2]|replace({'<h3>' : '<h4 class="title">'}) }}
+                {{ projectsection[3]|replace({'<p>' : '<p class="description">'}) }}
+                <p class="view">View Project</p>
+            </div>
+        </div>
+    {% endfor %}
+    {# end selected projects loop #}
+
+    </div>
+
+</div>
+{% endif %}
+{# end selected projects heading conditional #}
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{# create variable for metadata array #}
+{% set mb_metadata = page.metadata %}
+
+{# 1 - if the title field doesn't exist in page metadata, output the site title #}
+{% if mb_metadata.title == '' %}
+    <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+{% endif %}
+
+{# 2 - run for loop for all page metadata #}
+{% for meta in mb_metadata %}
+
+    {# 3 - filter out everything we don't want #}
+    {% if meta.name in ['title', 'description' , 'keywords', 'og:title', 'og:description', 'og:image'] %}
+
+        {# 4 - everything that isn't the title tag #}
+        {% if meta.name != 'title' %}
+            <meta {% if meta.name %}name="{{ meta.name }}" {% endif %}
+            {% if meta.http_equiv %}http-equiv="{{ meta.http_equiv }}" {% endif %}
+            {% if meta.charset %}charset="{{ meta.charset }}" {% endif %}
+            {% if meta.property %}property="{{ meta.property }}" {% endif %}
+            {% if meta.content %}content="{{ meta.content }}" {% endif %}/>
+
+        {# 5 - title tag #}
+        {% elseif meta.name == 'title' %}
+            <title>{{ meta.content }}</title>
+        {% endif %}
+
+    {% endif %}{# end filter in part 1) #}
+{% endfor %}
+
+{# 2 - open graph - site name and page url (not set in the page metadata) #}
+{% set metastring = header.metadata|keys|join %}
+{% if metastring|contains('og:') %}
+    <meta name="og:site_name" property="og:site_name" content="{{ site.title }}" />
+    <meta name="og:url " property="og:url" content="{{ uri.url }}" />
+{% endif %}

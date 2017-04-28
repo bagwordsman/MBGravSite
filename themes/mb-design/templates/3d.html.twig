@@ -1,0 +1,23 @@
+{% extends 'partials/th3dcard.html.twig' %}
+{% block content %}
+
+{# get page content #}
+{% set content = page.content|split('<hr />') %}
+
+{# set headline instructions #}
+{# note: these are replaced when screen size changes - check how this is done - in js somewhere #}
+{% if content[0] %}
+<div id="demo">
+    <p>{{ content[0]|striptags }}</p>
+    <!--<p>Click or tap and drag to rotate around the object&#46; Zoom with the mousewheel&#44; or spreading and contracting your fingers&#46;</p>-->
+</div>
+{% endif %}
+
+{% if content[1] and content[2] %}
+<div id="views">
+    <a id="button_front" class="button">{{ content[1]|striptags }}</a>
+    <a id="button_rear" class="button unclicked">{{ content[2]|striptags }}</a>
+</div>
+{% endif %}
+
+{% endblock %}

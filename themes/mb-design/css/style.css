@@ -1,0 +1,565 @@
+@charset "UTF-8";
+/* CSS Document */
+/*
+1. theme colours
+
+hover red - #e10033 - now defunt
+red - #ee1d3a
+white - #fff
+light grey - #ddd
+light to mid - #a0a0a0
+mid grey - #7f7f7f
+dark grey - #4d4d4d
+
+- - - - - - - - - -
+2. project colours
+
+James Torble - Tomato red - #ff6347
+Thomson Mediation - Navy Blue - #1e75af
+Lunalux - Paper Bag Brown - #907e68
+Able Mediation - Grass Green - #70bf44
+CMC - Racing Car Red - #ef353a
+Open Road - Electric Pink - #ed135d
+Angela Jaleel - Turquoise Blue - #75ceba
+TFL - Navy Blue - #204395
+
+- - - - - - - - - -
+3. font sizing
+- - - - -
+i. large
+#header__menu a, h1, h2, h3, p.lg { 1.66em / 5.9vw }
+- - - - -
+ii. medium
+h4, h5, h6, p, #project-nav a, #footer__menu a { 1.5em / 4.25vw }
+- - - - -
+iii. small
+.featured, .caption { 1em / 3.5vw }
+
+
+- - - - - - - - - -
+4. padding - smallest size
+- - - - -
+i. full width
+.half__left, .half__right, .half__centered, .wrapper__whole, .hero__info { padding: 2.5rem 2rem 3rem; }
+- - - - -
+ii. content reset
+.half__left, .half__right, .half__centered { padding: 0; }
+- - - - -
+iii. headline
+.wrapper__headline { padding: 0 2rem; }
+- - - - -
+iv. project nav
+#project-nav a { padding: .5rem 2rem; }
+- - - - -
+v. footer
+#footer__menu { padding: 2.5rem 2rem; }
+.wrapper__footer { padding: 1rem 2rem; }
+
+
+- - - - - - - - - -
+5. breakpoints
+600px
+ipad portrait (768 - 1024 and portrait)
+780px
+860px
+1024px
+1220px
+
+px - breakpoints (html)
+rem - containers
+
+*/
+
+
+html{font-family:'Signika Negative', arial, sans-serif;font-size:16px;line-height:1.45;/*line-height:1.35;*/font-weight:400;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;}
+body *{margin:0;padding:0;border:none;}
+body{margin:0;color:#4d4d4d;}
+
+
+/* - - - - - - - - - - */
+/* headings */
+h1, h2, h3, h4, h5, h6 /*,#header__menu a, #project-nav a, #footer__menu a*/{font-weight:600;}
+h1, h2, h3, h4, .lg{font-size:1.66em;font-size:5.9vw;}
+
+/* text */
+p, ul, li, a{font-weight:400;}
+h5, h6, p{font-size:1.5em;font-size:4.25vw;}
+.lg{margin-top:1em;}
+.lg:first-child{margin-top:0;}
+.lg a{text-decoration:underline;}
+
+/* lists */
+ul{list-style-position:inside;list-style:none;}
+
+/* links */
+a{text-decoration:none;color:#7f7f7f;transition:color .25s ease-in-out;}
+a:hover{color:#ee1d3a;}
+a:active{outline:none;}
+
+/* borders */
+.border{border:1px solid #4d4d4d;}
+
+/* 404 not found url */
+#url{color:#ee1d3a;}
+
+/* - - - - - - - - - - */
+/* header menu */
+#header__menu{display:table;text-align:center;}
+#header__menu li{display:table-cell;width:33.33%;width:calc(100vw / 3);}
+#header__menu a{display:block;box-sizing:border-box;overflow:hidden;transition:all ease-in-out 0.25s;padding:1.35em 0;max-height:4em;font-size:1.66em;font-size:5.9vw;}
+#header__menu .item--current a{text-decoration:underline;}
+#header__menu a:active{outline:none;}
+/* logo */
+#header__menu .item--home a{color:transparent;background-image:url('../images/assets/hexagon.svg');background-repeat:no-repeat;background-size:auto 50%;background-position:center;}
+#header__menu .item--home a:hover{background-color:#ee1d3a;background-image:url('../images/assets/hexagon-white.svg');}
+/* work and about */
+#header__menu .item--work a{color:#7f7f7f;}
+#header__menu .item--work a:hover{background-color:#ddd;}
+#header__menu .item--about a:hover{background-color:#4d4d4d;color:#ddd;}
+
+
+/* - - - - - - - - - - */
+/* content */
+.wrapper{display:block;box-sizing:border-box;}
+.wrapper:after{display:block;content:"";clear:both;visibility:hidden;}
+
+/* whole */
+.wrapper__whole{display:block;box-sizing:border-box;padding:2.5rem 2rem 3rem;}
+.wrapper__whole:after{display:block;content:"";clear:both;visibility:hidden;}
+/* headline */
+.wrapper__headline{display:block;box-sizing:border-box;padding:0 2rem;}
+.wrapper__headline h1,
+.wrapper__headline h2,
+.wrapper__headline h3{/*font-weight:400;*/font-size:1.66em;font-size:5.9vw;padding:0.35em 0;}
+.home .wrapper__headline{background-color:#ee1d3a;color:#fff;}
+.work .wrapper__headline,
+.wrapper__headline.headline--work{background-color:#ddd;color:#7f7f7f;}
+.about .wrapper__headline{background-color:#4d4d4d;color:#ddd;}
+
+/* NOTE: in project pages, could add project page colour in 'other project' heading automatically */
+
+/* half */
+.half__left,
+.half__right,
+.half__centered{display:block;box-sizing:border-box;padding:2.5rem 2rem 3rem;}
+/* text containers */
+.half__left.content,
+.half__right.content,
+.half__centered.content{padding:0;}
+/* text */
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6,
+.content p,
+.content ul{text-align:justify;margin:1em 0;padding:0 2rem;}
+
+/* old classes - override above text styles
+ - removed old .caption class (at top of css)
+ - border class is still there
+
+h2.nomargin,
+h3.nomargin,
+p.nomargin{margin:0;}
+h2.notopmargin,
+h3.notopmargin,
+p.notopmargin{margin-top:0;}
+
+.content a{text-decoration:underline;}
+.content .lg{text-align:center;}/* phone and email
+.content img{width:100%;margin-bottom:1rem;}
+.content img + .caption{margin-top:-0.5em;}
+
+.caption{color:#a0a0a0;margin-top:1em;font-size:1em;font-size:3.5vw;}
+.caption:before{content:"- ";}
+*/
+
+/* text formatting */
+.content a{text-decoration:underline;}
+.content .lg{text-align:center;}/* phone and email
+
+/* images */
+.content img {width:100%;margin-bottom:1rem;border-top:1px solid #4d4d4d;border-bottom:1px solid #4d4d4d;box-sizing:border-box;}
+
+/* captions */
+.content img + p{color:#a0a0a0;margin-top:-0.5em;font-size:1em;font-size:3.5vw;}
+.content img + p:before{content:"- ";}
+
+/* text */
+.content h2{margin:0;}
+.content h2 ~ p{margin-top:0;}/* all sibling <p> */
+.content h2 + p,/* first sibling <p> */
+.content h2 + img{margin-top:1em;}
+.content h2 + p:last-child{margin-top:0;}/* if <h2> only has one sibling */
+.content img + p + h2{margin-bottom:1em;}
+
+
+
+
+/* - - - - - - - - - - */
+/* thumbnails */
+.thumbnail{position:relative;background-repeat:no-repeat;background-size:cover;box-sizing:border-box;}
+.thumbnail .overlay{position:absolute;top:0;right:0;bottom:0;left:0;z-index:2;opacity:0;transition:opacity ease-in-out .25s;}
+/* square thumbnails - for browsers that recognise vw */
+.half__left.thumbnail,
+.half__right.thumbnail{min-height:300px;height:100vw;}
+/* thumbnail text */
+/* a) container */
+.info{display:inline-block;position:relative;pointer-events:none;transition:all ease-in-out .25s;}
+/* b) featured */
+.featured{display:inline-block;text-shadow:none;text-transform:uppercase;border-bottom:1px solid #4d4d4d;margin-bottom:.5em;font-size:1em;font-size:3.5vw;}
+/* c) title */
+.title{/*font-weight:600;*/}
+/* d) description */
+.description{}
+/* e) view */
+.view{text-shadow:none;text-transform:uppercase;letter-spacing:.1em;transition:letter-spacing ease-in-out .25s;margin-top:.25em;}
+.view:after{content:" ❯";}
+/* thumbnail images:hover */
+.thumbnail .overlay:hover,
+.thumbnail .overlay:focus,
+.thumbnail .overlay:active{cursor:pointer;opacity:.5;}
+/* text effects */
+.thumbnail .overlay:hover + .info{z-index:4;transform:scale(1.1);text-shadow:-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;}
+.thumbnail .overlay:hover + .info--inverse{text-shadow:-.1em -.1em 0 #4d4d4d, .1em -.1em 0 #4d4d4d, -.1em .1em 0 #4d4d4d, .1em .1em 0 #4d4d4d;}
+.thumbnail .overlay:hover + .info .view{letter-spacing:.15em;text-decoration:underline;text-shadow:none;}
+
+/* assistive text - for accessibility, anchor links need to contain text */
+/* note: having this in spans did not work too well */
+.assistive-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: polygon(0px 0px, 0px 0px,0px 0px, 0px 0px);
+    position: absolute !important;
+    white-space: nowrap;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+.assistive-text:focus {
+    clip: auto !important;
+    display: block;
+    height: auto;
+    left: 5px;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+}
+
+
+/* thumbnail images */
+/* background images and colours added via inline styling */
+/* 1 - background-image added through the page editor - in page content, thumbnail section at top */
+/* 2 - background-color added through the page editor - in page meta */
+/* 3 - background position-y of thumbnails added through the page editor - in page meta */
+
+
+
+/* - - - - - - - - - - */
+/* project pages */
+.hero{position:relative;}
+.hero img{width:100%;}
+/* hero text */
+.hero__info{/* transform:scale(1.1); - messes up the alignment, come back to this */transform-origin:top left;position:absolute;top:0;left:0;z-index:4;text-shadow:-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;padding:2.5rem 2rem 3rem;}
+
+/* project nav */
+#project-nav{display:table;border-top:1px solid #7f7f7f;}
+#project-nav li{display:table-cell;width:50%;width:50vw;overflow:hidden;}
+#project-nav a{display:block;box-sizing:border-box;transition:all ease-in-out .25s;padding:.5rem 2rem;font-size:1.5em;font-size:4.25vw;}
+#project-nav .next{text-align:right;}
+#project-nav .prev a:before{content:"❮ ";}
+#project-nav .next a:after{content:" ❯";}
+/* hover styles */
+#project-nav a:hover,
+#project-nav a:focus,
+#project-nav a:active{background-color:#ee1d3a;color:#fff;}
+#project-nav .prev a:hover{padding-left:1em;}
+#project-nav .next a:hover{padding-right:1em;}
+
+/* - - - - - - - - */
+/* all pages - used in linked project container AND hero/headers of projects */
+.info--inverse,
+.info--inverse .view{color:#fff;text-shadow:-1px -1px 0 #4d4d4d, 1px -1px 0 #4d4d4d, -1px 1px 0 #4d4d4d, 1px 1px 0 #4d4d4d;}
+
+/* - - - - - - - - */
+/* Tom Hudson - see th.css*/
+.content iframe{width:100%;min-height:30rem;margin:1rem 0 2rem;}
+
+
+
+/* - - - - - - - - - - */
+/* footer */
+#footer{background-color:#4d4d4d;color:#fff;}
+#footer .wrapper:first-child{border-bottom:1px solid #7f7f7f;}
+#footer__menu{display:block;box-sizing:border-box;border-bottom:1px solid #7f7f7f;padding:2.5rem 2rem;}
+#footer__menu li{margin-top:1em;}
+#footer__menu li:first-child{margin-top:0;}
+#footer__menu a{font-size:1.5em;font-size:4.25vw;}
+#footer__menu .item--current a{text-decoration:underline;}
+.wrapper__footer{display:block;box-sizing:border-box;padding:1rem 2rem;}
+
+
+
+
+/* media queries */
+@media screen and (min-width: 600px) {
+
+	/* headings */
+	#header__menu a, h1, h2, h3, h4, p.lg{font-size:1.4em;font-size:3.6vw;}/* 1.4 / 3.6 font-size:1.45em;font-size:3.85vw; */
+	/* headline */
+	.wrapper__headline h1,
+  .wrapper__headline h2,
+	.wrapper__headline h3{font-size:1.15em;font-size:3.1vw;}/* 1.2 / 3.18 */
+	/* text */
+	h5, h6, p, #project-nav a, #footer__menu a{font-size:1.25em;font-size:3.25vw;}
+	/* small text */
+	.featured, .content img + p{font-size:.95em;font-size:2.5vw;}
+
+	/* - - - - - - - - - - */
+	/* header menu */
+	#header__menu .item--home{width:50%;width:50vw;}
+	#header__menu .item--work,
+	#header__menu .item--about{width:25%;width:25vw;}
+	#header__menu a{padding:1em 0;}
+	/* logo */
+	#header__menu .item--home a{background-size:auto 70%;text-indent:5.25rem;text-align:left;}
+	#header__menu .item--home a:hover,
+	#header__menu .item--home a:focus,
+	#header__menu .item--home a:active{background-image:url('../images/assets/hexagon-white_lg.svg');/* svg with no empty space for left alignment */background-position:2rem center;color:#fff;}
+
+	/* - - - - - - - - - - */
+	.wrapper{width:100vw;}/* required by IE edge */
+	/* half */
+	.half__left,
+	.half__right{width:50%;width:50vw;float:left;}
+	.half__right{text-align:right;}
+	.half__left.content{padding-left:2rem;padding-right:1rem;}
+	.half__right.content{padding-left:1rem;padding-right:2rem;}
+	/* thumbnail images */
+	.half__left.thumbnail,
+	.half__right.thumbnail{width:50vw;height:50vw;max-height:430px;}/* next breakpoint: 860/2 */
+	/* half-ish */
+	.half__centered{width:65%;width:65vw;margin:0 auto;}
+	.headline--centered{width:65%;width:65vw;margin:0 auto;padding:0 2rem;box-sizing:border-box;} /* new selector for larger sizes - centred headline on about page */
+
+	/* images */
+	.content img {border:1px solid #4d4d4d;}
+	/* caption */
+	.content img + p{padding-left:0;padding-right:0;}
+
+	/* - - - - - - - - - - */
+	/* 1. home */
+	.wrapper.vh{position:relative;overflow:hidden;height:calc(100vh - 7.5em);}/* this is why you don't use ems! - they never add up */
+	.half__right.thumbnail.thumbnail--featured{position:absolute;top:0;bottom:0;right:0;height:100%;max-height:100%;}
+	/* headline and menu item
+	height:calc(100vh - 1.25em - .7em - 1.45em - 2em) = 5.4em
+	 */
+	 .wrapper__whole.thumbnail{min-height:150px;min-height:25vw;}/* 4:1 aspect ratio */
+
+	 /* Tom Hudson - th.css is edited at this size */
+
+}
+
+/* tablet conditionals */
+/* ipad portrait */
+@media only screen
+	and (min-device-width: 600px)
+	and (max-device-width: 1024px)
+	and (orientation: portrait) {
+	/* mainly for home page - left paragraph overflows if .lg not reduced */
+	p.lg{font-size:1.74em;font-size:3.25vw;}
+
+	/* 1. home */
+	.wrapper.vh{height:50vw;}
+	.half__right.thumbnail.thumbnail--featured{height:50vw;max-height:512px;max-height:50vw;}
+}
+/* smaller tablets */
+@media only screen
+	and (device-width: 600px)
+	and (orientation: portrait) {
+	.wrapper__headline h1,
+  .wrapper__headline h2,
+	.wrapper__headline h3{font-size:3vw;}/* hudl */
+	.home p.lg:first-child{margin-top:-0.75em;}/* hudl */
+}
+
+
+@media screen and (min-width: 780px) {
+	/* headline */
+	.wrapper__headline h1,
+  .wrapper__headline h2,
+	.wrapper__headline h3{font-size:1.55em;font-size:3.18vw;}
+	/* logo */
+	#header__menu .item--home a{text-indent:6.75rem;}
+}
+
+
+@media screen and (min-width: 860px) {
+
+	/* make text smaller here, then alter padding at 1024 */
+
+	/* headings and headline same size */
+	#header__menu a, h1, h2, h3, p.lg,
+	.wrapper__headline h1,
+  .wrapper__headline h2,
+	.wrapper__headline h3{font-size:1.74em;font-size:3.25vw;}
+	/* text */
+	h5, h6, p, #project-nav a, #footer__menu a{font-size:1.4em;font-size:2.61vw;}
+	/* small text */
+	.featured, .content img + p{font-size:1em;font-size:1.85vw;}
+
+	/* - - - - - - - - - - */
+	/* logo */
+	#header__menu .item--home a{text-indent:8rem;}
+
+	/* - - - - - - - - - - */
+	/* thumbnail images */
+	.half__left.thumbnail,
+	.half__right.thumbnail{max-height:512px;}/* next breakpoint: 1024/2 */
+	/* - - - - - - - - - - */
+	/* 1. home */
+	.wrapper.vh{height:50vw;}/* fit thumbnail height */
+	.half__right.thumbnail.thumbnail--featured{height:50vw;max-height:512px;max-height:50vw;}/* next breakpoint: 1024/2 */
+	.wrapper__whole.thumbnail{min-height:215px;min-height:25vw;}/* 4:1 aspect ratio */
+
+
+}
+
+
+@media screen and (min-width: 1024px) {
+
+	/* headings and headline same size */
+	#header__menu a, h1, h2, h3, h4, p.lg,
+	.wrapper__headline h1,
+  .wrapper__headline h2,
+	.wrapper__headline h3{font-size:1.6em;font-size:2.5vw;}
+	/* text */
+	h5, h6, p, #project-nav a, #footer__menu a{font-size:1.27em;font-size:1.98vw;}
+	/* small text */
+	.featured, .content img + p{font-size:1em;}
+
+	/* - - - - - - - - - - */
+	/* header menu: logo */
+	#header__menu .item--home a{text-indent:10rem;}
+	#header__menu .item--home a:hover,
+	#header__menu .item--home a:focus,
+	#header__menu .item--home a:active{background-position:4rem center;}
+
+	/* - - - - - - - - - - */
+	/* whole and half */
+	.half__centered,
+	.wrapper__whole,
+	.hero__info,
+	.wrapper__headline,
+	.headline--centered,
+	#footer__menu,
+	.wrapper__footer{padding-left:4rem;padding-right:4rem;}
+	/* half */
+	.half__left,
+	.half__left.content{padding-left:4rem;}
+	.half__right,
+	.half__right.content{padding-right:4rem;}
+	/* half-ish */
+	.half__centered,
+	.headline--centered{width:50%;width:50vw;}
+	.headline--centered,
+	/* text */
+	.content h1,
+	.content h2,
+	.content h3,
+	.content h4,
+	.content h5,
+	.content h6,
+	.content p,
+	.content ul{padding:0 2.5rem;}
+
+	/* - - - - - - - - - - */
+	/* thumbnail images */
+	.half__left.thumbnail,
+	.half__right.thumbnail{max-height:610px;}/* next breakpoint: 1220/2  */
+
+	/* - - - - - - - - - - */
+	/* 1. home */
+	.wrapper.vh{height:50vw;}/* fit thumbnail height */
+	.half__right.thumbnail.thumbnail--featured{height:50vw;max-height:610px;max-height:50vw;}/* next breakpoint: 1220/2 */
+	.wrapper__whole.thumbnail{min-height:256px;max-height:256px;}/* don't get any taller from now on *//* min-height:256px;min-height:25vw; *//* 4:1 aspect ratio */
+
+	/* - - - - - - - - - - */
+	/* project nav */
+	#project-nav .prev a{padding-left:4rem;}
+	#project-nav .next a{padding-right:4rem;}
+	#project-nav .prev a:hover{padding-left:2rem;}
+	#project-nav .next a:hover{padding-right:2rem;}
+	#project-nav .prev a:after{content:"ious Project";}
+	#project-nav .next a:after{content:" Project ❯";}
+
+
+	/* - - - - - - - - */
+	/* Tom Hudson - th.css edited at this size */
+
+}
+
+
+@media screen and (min-width: 1220px) {
+
+	/* headings and headline same size */
+	#header__menu a, h1, h2, h3, h4, p.lg,
+.wrapper__headline h1,
+.wrapper__headline h2,
+.wrapper__headline h3{font-size:2em;/*font-size:1.6em;font-size:2.5vw;*/}
+	/* text */
+	h5, h6, p, #project-nav a, #footer__menu a{font-size:1.6em;/*font-size:1.27em;font-size:1.98vw;*/}
+	/* small text */
+	.featured{font-size:1.25em;}
+	/* .caption can stay at 1em */
+
+	/* - - - - - - - - - - */
+	/* header menu: logo */
+	#header__menu .item--home a{text-indent:14rem;}
+	#header__menu .item--home a:hover,
+	#header__menu .item--home a:focus,
+	#header__menu .item--home a:active{background-position:8rem center;}
+
+	/* - - - - - - - - - - */
+	/* whole and half */
+	.half__centered,
+	.wrapper__whole,
+	.hero__info,
+	.wrapper__headline,
+	#footer__menu,
+	.wrapper__footer{padding-left:8rem;padding-right:8rem;}
+	/* half */
+	.half__left,
+	.half__left.content{padding-left:8rem;}
+	.half__right,
+	.half__right.content{padding-right:8rem;}
+
+	/* - - - - - - - - - - */
+	/* thumbnail images */
+	.half__left.thumbnail,
+	.half__right.thumbnail{max-height:720px;}/* next breakpoint: 1440/2  */
+
+	/* - - - - - - - - - - */
+	/* 1. home */
+	.half__right.thumbnail.thumbnail--featured{max-height:720px;max-height:50vw;}/* next breakpoint: ??? make 100% at last breakpoint? - maybe, not sure */
+	/* .wrapper__whole.thumbnail{min-height:305px;min-height:25vw;} dont get taller *//* 4:1 aspect ratio */
+
+	/* - - - - - - - - - - */
+	/* 3. project pages */
+	.hero__info h1{font-size:2.5em;}
+	.hero__info p{font-size:2em;}
+	/* project nav */
+	#project-nav .prev a{padding-left:8rem;}
+	#project-nav .next a{padding-right:8rem;}
+	#project-nav .prev a:hover{padding-left:4rem;}
+	#project-nav .next a:hover{padding-right:4rem;}
+
+}
+
+/* max width for laptop */
+/*
+@media screen and (min-width: 1439px) {
+
+}
+*/

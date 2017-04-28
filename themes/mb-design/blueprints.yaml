@@ -1,0 +1,27 @@
+name: Mb Design
+version: 0.1.0
+description: MB Design Website Theme 2017
+icon: rebel
+author:
+  name: Martin Bagshaw
+  email: hello@martinbagshaw.co.uk
+homepage: https://github.com/martin-bagshaw/grav-theme-mb-design
+demo: http://demo.yoursite.com
+keywords: grav, theme, etc
+bugs: https://github.com/martin-bagshaw/grav-theme-mb-design/issues
+readme: https://github.com/martin-bagshaw/grav-theme-mb-design/blob/develop/README.md
+license: MIT
+
+form:
+  validation: loose
+  fields:
+    dropdown.enabled:
+        type: toggle
+        label: Dropdown in Menu
+        highlight: 1
+        default: 1
+        options:
+          1: PLUGIN_ADMIN.ENABLED
+          0: PLUGIN_ADMIN.DISABLED
+        validate:
+          type: bool

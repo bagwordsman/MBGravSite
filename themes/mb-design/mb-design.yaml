@@ -1,0 +1,11 @@
+enabled: true
+dropdown:
+  enabled: false
+
+pages:
+  markdown:
+    extra: true
+
+twig_first: true
+process:
+    twig: true

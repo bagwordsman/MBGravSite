@@ -1,0 +1,215 @@
+{# project page template #}
+{% extends 'partials/base.html.twig' %}
+{% block content %}
+
+{# split page content with --- or <hr/> tag - defined in page admin panel #}
+{% set content = page.content|split('<hr />') %}
+
+{# get page metadata #}
+{% set pagemeta = page.header.metadata %}
+{# dump(page) #}
+
+    {# 1 - hero image and h1 + description #}
+    <div class="wrapper">
+        <div class="hero">
+            {% set hero = content[1]|split('</p>') %}
+            <div class="hero__info{% if pagemeta.inverseHero == 'yes' %} info--inverse{% endif %}">
+                {{ hero[1]|replace({'<p>' : '<p class="description">', '<h1>' : '<h1 class="title">'}) }}
+            </div>
+            {{ hero[0]|striptags('<img>') }}
+        </div>
+    </div>
+
+    {# 2 - create columns #}
+    {#  - look a everything after thumbnails and hero #}
+    {% set columns = content[2 :] %}
+
+    {% for column in columns %}
+        {# split columns up by line breaks #}
+        {% set contents = column|split('\n')%}
+
+        {# find out if a <h2> is used in the page content - for use in other project introduction at bottom of page #}
+        {% if column|contains('h2') %}
+            {% set otherprojecth2 = column|contains('h2') %}
+        {% endif %}
+
+        {# - mark up columns depending upon what their first line (second array item) contains #}
+        {# - as line break ('\n') is used to split, contents[0] will be blank #}
+        {# 'left column', 'right column', 'center column' and 'other project' are the keywords #}
+
+        {# i) 'left column' #}
+        {% if (contents[1])|contains('left column') %}
+    <div class="wrapper">
+        <div class="half__left content" markdown="1">
+            {# look at 3rd item onward #}
+            {% for part in contents[2 :] %}
+                {# images #}
+                {% if part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
+                {# iframe #}
+                {% elseif part|contains('src') and part|contains('iframe')%}{{ part }}
+                {# captions marked in italics #}
+                {% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
+                {% else %} {{ part }}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {# ii) 'right column' #}
+        {% elseif (contents[1])|contains('right column') %}
+        <div class="half__right content" markdown="1">
+            {# look at 3rd item onward #}
+            {% for part in contents[2 :] %}
+                {# images #}
+                {% if part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
+                {# iframe #}
+                {% elseif part|contains('src') and part|contains('iframe')%}{{ part }}
+                {# captions marked in italics #}
+                {% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
+                {% else %} {{ part }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div><!-- wrapper -->
+
+        {# iii) 'center column' #}
+        {% elseif (contents[1])|contains('center column') %}
+    <div class="wrapper">
+        <div class="half__centered content" markdown="1">
+            {# look at 3rd item onward #}
+            {% for part in contents[2 :] %}
+                {# images #}
+                {% if part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
+                {# iframe #}
+                {% elseif part|contains('src') and part|contains('iframe')%}{{ part }}
+                {# captions marked in italics #}
+                {% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
+                {% else %}{{ part }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div><!-- wrapper -->
+
+
+
+
+        {# iv) 'other project' - thumbnail #}
+        {% elseif (contents[1])|contains('other project') %}
+
+        {# 1 - set project tag to be pulled in (in page contents) #}
+        {% set tag = contents[3]|striptags %}
+        {# dump(tag) #}
+
+        {# 2 - match tag in project list to tag in page contents #}
+        {% for project in taxonomy.findTaxonomy({'tag' : tag }) %}
+        {# dump(project) #}
+
+        {# 3 - get thumbnail and content #}
+        {% set projectcontent = project.content|split('<hr />') %}
+        {% set thumb = projectcontent[0]|split('\n') %}{# get 1st section - split at line break #}
+        {% set image = thumb[0]|striptags('<img>') %}{# get image src for wide background-image (1st item in array) #}
+        {% set thumbnail = image|split('"') %}{# split <img> into parts #}
+
+        {# 4 - styling - via project meta #}
+        {% set projectmeta = project.header.metadata %}
+
+    {# 5 - compose headline #}
+    <div class="wrapper__headline" style="color:#fff;background-color:#{{ projectmeta.color }}">{# previously headline--work #}
+        {# add the title - this can be either <h2> or <h3> #}
+        {# a) no <h2> in the content, use <h2> #}
+        {% if otherprojecth2 =='' %}<h2>{{ contents[2]|striptags }}</h2>
+        {# b) if <h2> in the content, use <h3> #}
+        {% else %}<h3>{{ contents[2]|striptags }}</h3>
+        {% endif %}
+    </div><!-- wrapper__headline -->
+
+        {# 6 - compose thumbnail #}
+        {% if thumbnail %}
+    <div class="wrapper__whole thumbnail" style="background-image:url('{% for item in thumbnail %}{% if item|contains('jpg') %}{{ item }}{% endif %}{% endfor %}'){% if projectmeta.footerThumbnailPosY %};background-position-y:{{projectmeta.footerThumbnailPosY}}%{% endif %}">
+
+        {# a) overlay #}
+        <a class="overlay" href="{{ project.slug }}" style="background-color:#{{ projectmeta.color }}">
+            {# anchor links must contain text for accessibility purposes #}
+            {% if thumb[2] or thumb[3] or thumb[4] %}
+            <div class="assistive-text">
+                {# <h3> or <h4> #}
+                <span class="{% if otherprojecth2 =='' %}h3{% else %}h4{% endif %}">
+                    {{ thumb[2]|striptags }}
+                </span>
+                <span class="description">
+                    {% if thumb[4]|length > 30 %}{{ thumb[4]|striptags }}
+                    {% else %}{{ thumb[3]|striptags }}
+                    {% endif %}
+                </span>
+            </div>
+            {% endif %}
+        </a>
+
+        {# b) info #}
+        <div class="info{% if projectmeta.inverseHero == 'yes' %} info--inverse{% endif %}">
+            {# <h3> or <h4> #}
+            {% if otherprojecth2 =='' %}
+            <h3 class="title">{{ thumb[2]|striptags }}</h3>
+            {% else %}
+            <h4 class="title">{{ thumb[2]|striptags }}</h4>
+            {% endif %}
+            {# if the longer description is available, use it #}
+            <p class="description">
+                {% if thumb[4]|length > 30 %}{{ thumb[4]|striptags }}
+                {% else %}{{ thumb[3]|striptags }}
+                {% endif %}
+            </p>
+        </div>
+
+    </div>
+        {% endif %}{# endif thumbnail exists #}
+    {% endfor %}{# end for tag match - which loads the project #}
+
+
+        {# v) center column if other #}
+        {% else %}
+    <div class="wrapper">
+        <div class="half__centered content" markdown="1">
+            {# look at 2nd item onward #}
+            {% for part in contents[1 :] %}
+                {# images #}
+                {% if part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
+                {# iframe #}
+                {% elseif part|contains('src') and part|contains('iframe')%}{{ part }}
+                {# captions marked in italics #}
+                {% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
+                {% else %} {{ part }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div><!-- wrapper -->
+        {% endif %}
+
+    {% endfor %}
+
+{% endblock %}
+
+
+
+
+
+{# ---------------------------------------- #}
+{# project navigation #}
+{% block projectnav %}
+
+{# 1 - get all sibling pages #}
+{% set projects = page.collection({'items':{'@page.children':'/work'},'order': {'by': 'date', 'dir': 'desc'}}) %}
+{# dump(page.path) #}
+
+    {# 2 - compose the nav #}
+    <ul id="project-nav" role="navigation">
+        {# if first item in the list, prev link goes to last item #}
+        <li class="prev">
+            <a href="{% if projects.isLast(page.path) %}{{ projects.first(page.path).url }}{% else %}{{ projects.prevSibling(page.path).url }}{% endif %}">Prev</a>
+        </li>
+        {# if last item in the list, next link goes to first item #}
+        <li class="next">
+            <a href="{% if projects.isFirst(page.path) %}{{ projects.last(page.path).url }}{% else %}{{ projects.nextSibling(page.path).url }}{% endif %}">Next</a>
+        </li>
+    </ul>
+
+{% endblock %}

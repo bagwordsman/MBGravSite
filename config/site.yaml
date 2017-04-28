@@ -1,0 +1,17 @@
+title: 'Martin Bagshaw - Graphic & Web Design'
+default_lang: en
+author:
+  name: 'Martin Bagshaw'
+  email: hello@martinbagshaw.co.uk
+taxonomies:
+  - category
+  - tag
+metadata:
+  description: 'Online Portfolio of Graphic Designer and Frontend Developer, Martin Bagshaw'
+summary:
+  enabled: true
+  format: short
+  size: 300
+  delimiter: '==='
+blog:
+  route: /blog

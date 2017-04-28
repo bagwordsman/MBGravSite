@@ -1,0 +1,93 @@
+{# project page template #}
+{% extends 'partials/base.html.twig' %}
+{% block content %}
+
+{# split page content with --- or <hr/> tag - defined in page admin panel #}
+{% set content = page.content|split('<hr />') %}
+{# content[0] - first item in array used for thumbnails (square and wide) #}
+
+{# styling - via page meta #}
+{% set pagemeta = page.header.metadata %}
+{# dump(page) #}
+
+    <div class="wrapper">
+        {# hero image and h1 + description #}
+        <div class="hero">
+            {% set hero = content[1]|split('</p>') %}
+            <div class="hero__info{% if pagemeta.inverseHero == 'yes' %} info--inverse{% endif %}">
+                <!--<h1 class="title"></h1>
+                <p class="description"></p>-->
+                {{ hero[1]|replace({'<p>' : '<p class="description">', '<h1>' : '<h1 class="title">'}) }}
+            </div>
+            {{ hero[0]|striptags('<img>') }}
+        </div>
+
+
+        {# first centered paragraph #}
+        <div class="half__centered content" markdown="1">
+            {{ content[2] }}
+            {# image #}
+            {% set image = content[3]|split('</p>') %}
+            {{ image[0]|striptags('<img>') }}
+            {{ image[1]|replace({'<p>' : '<p class="caption">'}) }}
+        </div>
+    </div>
+
+
+    {# column = 5th item onward - after the main content column #}
+    {# 'left column', 'right column', and 'center column' are the three keywords in the content #}
+    {% set columns = content[4 :] %}
+
+    {# look at each column #}
+    {% for column in columns %}
+        {# split column by p tags #}
+        {% set contents = column|split('</p>')%}
+        {# look at 1st item in column(s) - this defines the type of column #}
+        {# dump(contents)#}
+
+
+        {# need to find a better way of doing this #}
+        {# 'left column' #}
+        {% if (contents[0])|contains('left column') %}
+            <div class="wrapper">
+                <div class="half__left content">
+                    {# look at 2nd item onward #}
+                    {% for part in contents[1 :] %}
+                        {% if part|contains('src') %} {{ part|striptags('<img>') }}
+                        {% elseif part|contains('<p>') %} {{ part|replace({'<p>' : '<p class="caption">'}) }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+        {% endif %}
+        {# 'right column' #}
+        {% if (contents[0])|contains('right column') %}
+                <div class="half__right content">
+                    {# look at 2nd item onward #}
+                    {% for part in contents[1 :] %}
+                        {% if part|contains('src') %} {{ part|striptags('<img>') }}
+                        {% elseif part|contains('<p>') %} {{ part|replace({'<p>' : '<p class="caption">'}) }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+
+        {# 'center column' #}
+        {% if (contents[0])|contains('center column') %}
+            <div class="wrapper">
+                <div class="half__centered content">
+                    {# look at 2nd item onward #}
+                    {% for part in contents[1 :] %}
+                        {% if part|contains('src') %} {{ part|striptags('<img>') }}
+                        {% elseif part|contains('<p>') %} {{ part|replace({'<p>' : '<p class="caption">'}) }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+    {% endfor %}
+
+
+{% endblock %}
