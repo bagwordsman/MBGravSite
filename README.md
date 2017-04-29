@@ -8,3 +8,5 @@
 3 - Refactor css to Sass
 
 4 - Minified and combined css and js for production - making use of grav pipeline functionality
+
+5 - Image Gallery / lightbox  in project pages
