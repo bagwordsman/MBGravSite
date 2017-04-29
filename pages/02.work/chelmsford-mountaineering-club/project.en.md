@@ -33,8 +33,6 @@ In print format, I designed a new membership form and membership card template, 
 
 Aiming to standardise and simplify the design across different media, I picked a more legible main font, and separated information in a clearer way using colour, font weight, and spacing.
 
----
-
 ![climbing club calendar](cmc-calendar-all_tilt.jpg)
 _Calendars for 2014, 2015, and 2016_
 

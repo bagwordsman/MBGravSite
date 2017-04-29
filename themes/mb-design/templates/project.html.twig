@@ -43,14 +43,7 @@
         <div class="half__left content" markdown="1">
             {# look at 3rd item onward #}
             {% for part in contents[2 :] %}
-                {# images #}
-                {% if part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
-                {# iframe #}
-                {% elseif part|contains('src') and part|contains('iframe')%}{{ part }}
-                {# captions marked in italics #}
-                {% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
-                {% else %} {{ part }}
-                {% endif %}
+                {% include 'partials/dry/projectcolumns.html.twig' %}
             {% endfor %}
         </div>
 
@@ -59,14 +52,7 @@
         <div class="half__right content" markdown="1">
             {# look at 3rd item onward #}
             {% for part in contents[2 :] %}
-                {# images #}
-                {% if part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
-                {# iframe #}
-                {% elseif part|contains('src') and part|contains('iframe')%}{{ part }}
-                {# captions marked in italics #}
-                {% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
-                {% else %} {{ part }}
-                {% endif %}
+                {% include 'partials/dry/projectcolumns.html.twig' %}
             {% endfor %}
         </div>
     </div><!-- wrapper -->
@@ -77,14 +63,7 @@
         <div class="half__centered content" markdown="1">
             {# look at 3rd item onward #}
             {% for part in contents[2 :] %}
-                {# images #}
-                {% if part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
-                {# iframe #}
-                {% elseif part|contains('src') and part|contains('iframe')%}{{ part }}
-                {# captions marked in italics #}
-                {% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
-                {% else %}{{ part }}
-                {% endif %}
+                {% include 'partials/dry/projectcolumns.html.twig' %}
             {% endfor %}
         </div>
     </div><!-- wrapper -->
@@ -171,14 +150,7 @@
         <div class="half__centered content" markdown="1">
             {# look at 2nd item onward #}
             {% for part in contents[1 :] %}
-                {# images #}
-                {% if part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
-                {# iframe #}
-                {% elseif part|contains('src') and part|contains('iframe')%}{{ part }}
-                {# captions marked in italics #}
-                {% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
-                {% else %} {{ part }}
-                {% endif %}
+                {% include 'partials/dry/projectcolumns.html.twig' %}
             {% endfor %}
         </div>
     </div><!-- wrapper -->

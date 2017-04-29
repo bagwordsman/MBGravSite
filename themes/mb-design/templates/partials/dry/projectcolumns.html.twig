@@ -1,0 +1,11 @@
+{# dryer code for project columns - cut down repetition #}
+{# NOTE: 2nd and 3rd items onward are looked at (contents[1 :] and contents[2 :]) #}
+
+{# images #}
+{% if part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
+{# iframe #}
+{% elseif part|contains('src') and part|contains('iframe')%}{{ part }}
+{# captions marked in italics #}
+{% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
+{% else %} {{ part }}
+{% endif %}
