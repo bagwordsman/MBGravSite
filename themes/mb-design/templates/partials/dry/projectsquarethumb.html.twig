@@ -1,0 +1,60 @@
+{# 2 - conditionals #}
+{# a) - work or home page #}
+{% if uri.url|contains('work') %}
+    {% set work = 'workpage' %}
+{% endif %}
+{# b) - category #}
+{% set projectcategory = project.header.taxonomy.category %}
+
+{# 3 - get project thumbnail #}
+{% set projectcontent = project.content|split('<hr />') %}
+{% set projectsection = projectcontent[0]|split('\n') %}{# split at line break #}
+{% set thumbnail = projectsection[1]|striptags('<img>') %}
+{# break into an array #}
+{% set thumbpart = thumbnail|split('"') %}
+
+{# 4 - get project metadata #}
+{% set projectmeta = project.header.metadata %}
+
+{# 5 - compose project thumbnail #}
+<div class="{# a) work page #}
+{% if work %}{% if loop.index0 is odd %}half__right{% elseif loop.index0 is even %}half__left{% endif %}
+{# b) category page #}
+{% elseif projectcategory != '' %}{% for category in projectcategory %}
+{% if category|contains('featured') %}half__right
+{% elseif category|contains('selected') %}{% if loop.index0 is even %}half__right{% elseif loop.index0 is odd %}half__left{% endif %}{% endif %}
+{% endfor %}{% endif %} thumbnail"
+style="background-image:url('{% for part in thumbpart %}{% if part|contains('jpg') %}{{ part }}{% endif %}{% endfor %}')">
+
+    {# project slug as url #}
+    <a class="overlay" href="work/{{ project.slug }}" style="background-color:#{{ projectmeta.color }}">
+        {# anchor links must contain text for accessibility purposes #}
+        {% if projectsection[2] or projectsection[3] %}
+        <div class="assistive-text">
+            {# work page = h2, featured category = h2, selected category = h4 #}
+            <span class="{% if work %}h2{% else %}{% for category in projectcategory %}{% if category|contains('featured') %}h2{% elseif category|contains('selected') %}h4{% endif %}{% endfor %}{% endif %}">{{ projectsection[2]|striptags }}</span>
+            <span class="p">{{ projectsection[3]|striptags }}</span>
+        </div>
+        {% endif %}
+    </a>
+    <div class="info{% if projectmeta.inverseThumbnail == 'yes' %} info--inverse{% endif %}">
+        {# featured project - latest work heading #}
+        {% for category in projectcategory %}{% if category|contains('featured') %}<p class="featured">Latest Work:</p>{% endif %}{% endfor %}
+        {# work page - heading is h2 #}
+        {% if work %}
+            {{ projectsection[2]|replace({'<h1>' : '<h2 class="title">', '<h2>' : '<h2 class="title">', '<h3>' : '<h2 class="title">'}) }}
+        {% else %}
+            {% for category in projectcategory %}
+                {# featured category - heading is h2 #}
+                {% if category|contains('featured') %}
+                    {{ projectsection[2]|replace({'<h1>' : '<h2 class="title">', '<h2>' : '<h2 class="title">', '<h3>' : '<h2 class="title">'}) }}
+                {# selected category - heading is h4 #}
+                {% elseif category|contains('selected') %}
+                    {{ projectsection[2]|replace({'<h1>' : '<h4 class="title">', '<h2>' : '<h4 class="title">', '<h3>' : '<h4 class="title">'}) }}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {{ projectsection[3]|replace({'<p>' : '<p class="description">'}) }}
+        <p class="view">View Project</p>
+    </div>
+</div>

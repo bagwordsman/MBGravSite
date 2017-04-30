@@ -21,8 +21,9 @@ content:
     pagination: true
 ---
 
-![test](work_50pc.jpg)
-## Work
+![Graphic and Web Design Portfolio of Martin Bagshaw](work_50pc.jpg)
+![Graphic and Web Design Portfolio of Martin Bagshaw](work_50pc.jpg)
+### Work
 A selection of my projects
 A diverse range of Print and Digital Projects, ranging from Web Design to Letterpress Print
 

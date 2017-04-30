@@ -5,92 +5,43 @@
 {# split array with --- or <hr/> tag - defined in page admin panel #}
 {% set content = page.content|split('<hr />') %}
 
+    {# 1 - h1 headline #}
     <div class="wrapper__headline">
         <div class="headline--centered">
             {{ content[1] }}
         </div>
     </div>
 
+    {# 2 - create arrays from page content (everything after thumbnails and hero) #}
+    {% set pagecontent = content[2 :] %}
+    {% for column in pagecontent %}{# a) - column defined by delimiter #}
+    {% set columnitems = column|split('\n')%}{# b) - columnitems defined by new line within column #}
 
-{# main page content #}
-
-{# 1 - break up content and create an array, splitting at delimiter --- #}
-{% set pagecontent = content[2 :] %}
-{% for section in pagecontent %}
-
-    {# 2 - handle linking page or project - this outputs last #}
-    {% if section|contains('other project') %}
-        {% set parts = section|split('\n')%}
-
-        {# a) - set project tag to be pulled in (in page contents) #}
-        {% set tag = parts[3]|striptags %}
-
-        {# b) - match tag in project list to tag in page contents #}
-        {% for project in taxonomy.findTaxonomy({'tag' : tag }) %}
-
-            {# c) - get thumbnail and content #}
-            {% set projectcontent = project.content|split('<hr />') %}
-            {% set thumb = projectcontent[0]|split('\n') %}{# get 1st section - split at line break #}
-            {% set image = thumb[0]|striptags('<img>') %}{# get image src for wide background-image (1st item in array) #}
-            {% set thumbnail = image|split('"') %}{# split <img> into parts #}
-
-            {# d) - styling - via project meta #}
-            {% set projectmeta = project.header.metadata %}
-
-            {# e) - compose headline #}
-    <div class="wrapper__headline" style="color:#fff;background-color:#{{ projectmeta.color }}">{# previously headline--work #}
-        {# add the title - can be either <h2> or <h3>, depending upon previous page content #}
-        {% for part in parts %}{% if part|contains('h2') or part|contains('h3')%}{{ part }}{% endif %}{% endfor %}
-    </div><!-- wrapper__headline -->
-
-            {# f) - compose thumbnail #}
-    {% if thumbnail %}
-    <div class="wrapper__whole thumbnail" style="background-image:url('{% for item in thumbnail %}{% if item|contains('jpg') %}{{ item }}{% endif %}{% endfor %}'){% if projectmeta.footerThumbnailPosY %};background-position-y:{{projectmeta.footerThumbnailPosY}}%{% endif %}">
-        <a class="overlay" href="{{ project.slug }}" style="background-color:#{{ projectmeta.color }}">
-            {# anchor links must contain text for accessibility purposes #}
-            {% if thumb[1] or thumb[2] or thumb[3] %}
-            <div class="assistive-text">
-                {{ thumb[1]|replace({'<h2>' : '<span class="h3">', '</h2>' : '</span>', '<h3>' : '<span class="h3">',  '</h3>' : '</span>'}) }}
-                <span class="p">
-                    {% if thumb[3]|length > 30 %}{{ thumb[3]|striptags }}
-                    {% else %}{{ thumb[2]|striptags }}
-                    {% endif %}
-                </span>
-            </div>
-            {% endif %}
-        </a>
-        <div class="info{% if projectmeta.inverseHero == 'yes' %} info--inverse{% endif %}">
-            {{ thumb[1]|replace({'<h1>' : '<h3 class="title">', '<h2>' : '<h3 class="title">', '<h3>' : '<h3 class="title">'}) }}
-            {# if the longer description is available, use it #}
-            <p class="description">
-            {% if thumb[3]|length > 30 %}{{ thumb[3]|striptags }}
-            {% else %}{{ thumb[2]|striptags }}
-            {% endif %}
-            </p>
-        </div>
-    </div>
+    {# 3 - if <h2> used in page content (after 2nd section, and before 'other project'), assign a var to the thumbnail #}
+    {# note: this can't be used in an if statement #}
+    {% if column|contains('h2') and 'other project' not in columnitems[1] %}
+        {% set otherprojectintro = 'h3projectintro' %}
     {% endif %}
 
-        {% endfor %}{# end match tag to project tag #}
-
-
+    {# 4 - 'other project' outputs last #}
+    {% if columnitems[1]|contains('other project') %}
+        {% include 'partials/dry/otherproject.html.twig' %}
 
     {% else %}
-    {# 3 - main page content - split at new line #}
+    {# 5 - main page content - split at new line #}
     {# markdown="1" allows html to be entered in the page #}
     <div class="whole" markdown="1">
         <div class="half__centered content">
-        {% set parts = section|split('\n')%}
 
-            {% for part in parts %}
+            {% for item in columnitems %}
                 {# anchor links #}
-                {% if part|contains('href') and part|contains('a')%}{{ part|replace({'<p>' : '<p class="lg">'}) }}
+                {% if item|contains('href') and item|contains('a')%}{{ item|replace({'<p>' : '<p class="lg">'}) }}
                 {# images #}
-                {% elseif part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
+                {% elseif item|contains('src') and item|contains('img')%} {{ item|striptags('<img>') }}
                 {# captions marked in italics #}
-                {% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
+                {% elseif item|contains('<em>') %} {{ item|replace({'<em>' : '<p>'}) }}
                 {# all other content #}
-                {% else %} {{ part }}
+                {% else %} {{ item }}
                 {% endif %}
             {% endfor %}
 

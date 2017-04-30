@@ -54,11 +54,11 @@ center column
 ![website home page](thomson_website-home.jpg)
 _Website Home Page_
 
+![html email](thomson_email.jpg)
+_HTML Email_
+
 ---
 
 other project
 ### A project where I followed, rather than created brand guidelines:
 open-road
-
-![html email](thomson_email.jpg)
-_HTML Email_

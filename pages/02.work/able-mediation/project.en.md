@@ -69,5 +69,5 @@ _Google Plus Page_
 ---
 
 other project
-### Able Mediation were referred to me by this client:
+### Able Mediation were kindly referred to me by this client:
 thomson-mediation

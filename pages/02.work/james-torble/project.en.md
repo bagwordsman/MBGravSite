@@ -10,6 +10,7 @@ metadata:
     footerThumbnailPosY: '7'
 taxonomy:
     category:
+        - whateve
         - selected
     tag:
         - james-torble

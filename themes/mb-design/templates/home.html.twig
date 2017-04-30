@@ -16,42 +16,11 @@
             {{ content[1]|replace({'<p>' : '<p class="lg">'}) }}
         </div>
 
-    {# featured or latest project #}
     {# 1 - loop through projects in the 'featured' category #}
     {% for project in taxonomy.findTaxonomy({'category':'featured'}) %}
-
-        {# 2 - get project thumbnail #}
-        {% set projectcontent = project.content|split('<hr />') %}
-        {% set projectsection = projectcontent[0]|split('\n') %}{# split at line break #}
-        {% set thumbnail = projectsection[1]|striptags('<img>') %}
-        {# break into an array #}
-        {% set thumbpart = thumbnail|split('"') %}
-
-        {# 3 - get project metadata #}
-        {% set projectmeta = project.header.metadata %}
-
-        {# 4 - compose project thumbnail #}
-        <div class="half__right thumbnail" style="background-image:url('{% for part in thumbpart %}{% if part|contains('jpg') %}{{ part }}{% endif %}{% endfor %}')">
-            <a class="overlay" href="work/{{ project.slug }}" {# need to avoid hard coding url #} style="background-color:#{{ projectmeta.color }}">
-                {# anchor links must contain text for accessibility purposes #}
-                {% if projectsection[2] or projectsection[3] %}
-                <div class="assistive-text">
-                    <span class="h2">{{ projectsection[2]|striptags }}</span>
-                    <span class="p">{{ projectsection[3]|striptags }}</span>
-                </div>
-                {% endif %}
-            </a>
-            <div class="info{% if project.inverseThumbnail == 'yes' %} info--inverse{% endif %}">
-                <p class="featured">Latest Work:</p>
-                {{ projectsection[2]|replace({'<h2>' : '<h2 class="title">', '<h3>' : '<h2 class="title">'}) }}
-                {{ projectsection[3]|replace({'<p>' : '<p class="description">'}) }}
-                <p class="view">View Project</p>
-            </div>
-        </div>
-
+        {% include 'partials/dry/projectsquarethumb.html.twig' %}
     {% endfor %}
-    {# end featured project loop #}
-
+    {# 1 - end featured project loop #}
     </div>
 
 {% endblock %}
@@ -73,7 +42,7 @@
   {# 3 - get thumnail and content #}
   {% set pagecontent = p.content|split('<hr />') %}
   {% set pagesection = pagecontent[0]|split('\n') %}{# split at line break #}
-  {% set thumbnail = pagesection[0]|striptags('<img>') %}{# get image (1st item in array) #}
+  {% set thumbnail = pagesection[1]|striptags('<img>') %}{# get image (1st item in array) #}
   {# break into an array #}
   {% set rectangethumbpart = thumbnail|split('"') %}
 
@@ -85,23 +54,23 @@
   <div class="wrapper__whole thumbnail" style="background-image:url('{% for part in rectangethumbpart %}{% if part|contains('jpg') %}{{ part }}{% endif %}{% endfor %}'){% if pagemeta.footerThumbnailPosY %};background-position-y:{{pagemeta.footerThumbnailPosY}}%{% endif %}">
       <a class="overlay" href="{{ pageslug }}" style="background-color:#{{ pagemeta.color }}">
           {# anchor links must contain text for accessibility purposes #}
-          {% if pagesection[1] or pagesection[2] or pagesection[3] %}
+          {% if pagesection[2] or pagesection[3] or pagesection[4] %}
           <div class="assistive-text">
-              <span class="h2">{{ pagesection[1]|striptags }}</span>
+              <span class="h2">{{ pagesection[2]|striptags }}</span>
               <span class="p">
-                  {% if pagesection[3]|length > 30 %}{{ pagesection[3]|striptags }}
-                  {% else %}{{ pagesection[2]|striptags }}
+                  {% if pagesection[4]|length > 30 %}{{ pagesection[4]|striptags }}
+                  {% else %}{{ pagesection[3]|striptags }}
                   {% endif %}
               </span>
           </div>
           {% endif %}
       </a>
       <div class="info{% if pagemeta.inverseThumbnail == 'yes' %} info--inverse{% endif %}">
-          {{ pagesection[1]|replace({'<h2>' : '<h2 class="title">'}) }}
+          {{ pagesection[2]|replace({'<h2>' : '<h2 class="title">', '<h3>' : '<h2 class="title">'}) }}
           {# if the longer description is available, use it #}
           <p class="description">
-          {% if pagesection[3]|length > 30 %}{{ pagesection[3]|striptags }}
-          {% else %}{{ pagesection[2]|striptags }}
+          {% if pagesection[4]|length > 30 %}{{ pagesection[4]|striptags }}
+          {% else %}{{ pagesection[3]|striptags }}
           {% endif %}
           </p>
       </div>
@@ -128,42 +97,11 @@
     </div>
 
     <div class="wrapper">
-
-    {# selected project #}
     {# 1 - loop through projects in the 'selected' category #}
     {% for project in taxonomy.findTaxonomy({'category':'selected'}) %}
-
-        {# 2 - get project thumbnail #}
-        {% set projectcontent = project.content|split('<hr />') %}
-        {% set projectsection = projectcontent[0]|split('\n') %}{# split at line break #}
-        {% set thumbnail = projectsection[1]|striptags('<img>') %}
-        {# break into an array #}
-        {% set thumbpart = thumbnail|split('"') %}
-
-        {# 3 - get project metadata #}
-        {% set projectmeta = project.header.metadata %}
-
-        {# 4 - compose project thumbnail #}
-        <div class="{% if loop.index0 is odd %}half__right{% elseif loop.index0 is even %}half__left{% endif %} thumbnail" style="background-image:url('{% for part in thumbpart %}{% if part|contains('jpg') %}{{ part }}{% endif %}{% endfor %}')">
-            {# best to add url rather than slug here - this may differ. Slug can be changed in page editor #}
-            <a class="overlay" href="work/{{ project.slug }}" {# need to avoid hard coding url #} style="background-color:#{{ projectmeta.color }}">
-                {# anchor links must contain text for accessibility purposes #}
-                {% if projectsection[2] or projectsection[3] %}
-                <div class="assistive-text">
-                    <span class="h4">{{ projectsection[2]|striptags }}</span>
-                    <span class="p">{{ projectsection[3]|striptags }}</span>
-                </div>
-                {% endif %}
-            </a>
-            <div class="info{% if projectmeta.inverseThumbnail == 'yes' %} info--inverse{% endif %}">
-                {{ projectsection[2]|replace({'<h3>' : '<h4 class="title">'}) }}
-                {{ projectsection[3]|replace({'<p>' : '<p class="description">'}) }}
-                <p class="view">View Project</p>
-            </div>
-        </div>
+        {% include 'partials/dry/projectsquarethumb.html.twig' %}
     {% endfor %}
-    {# end selected projects loop #}
-
+    {# 1 - end selected projects loop #}
     </div>
 
 </div>

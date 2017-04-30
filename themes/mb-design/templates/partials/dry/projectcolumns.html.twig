@@ -1,11 +1,10 @@
-{# dryer code for project columns - cut down repetition #}
-{# NOTE: 2nd and 3rd items onward are looked at (contents[1 :] and contents[2 :]) #}
+{# DRYer code for project page template #}
 
 {# images #}
-{% if part|contains('src') and part|contains('img')%} {{ part|striptags('<img>') }}
+{% if item|contains('src') and item|contains('img')%} {{ item|striptags('<img>') }}
 {# iframe #}
-{% elseif part|contains('src') and part|contains('iframe')%}{{ part }}
+{% elseif item|contains('src') and item|contains('iframe')%}{{ item }}
 {# captions marked in italics #}
-{% elseif part|contains('<em>') %} {{ part|replace({'<em>' : '<p>'}) }}
-{% else %} {{ part }}
+{% elseif item|contains('<em>') %} {{ item|replace({'<em>' : '<p>'}) }}
+{% else %} {{ item }}
 {% endif %}

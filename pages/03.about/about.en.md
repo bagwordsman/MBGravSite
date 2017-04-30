@@ -15,12 +15,15 @@ process:
 description: 'About me'
 ---
 
-![](about_50pc.jpg)
-## About Me
+![Martin Bagshaw](about_50pc.jpg)
+![Martin Bagshaw](about_50pc.jpg)
+### About Me
 More about me
 
 ---
+
 # About Me
+
 ---
 
 I like design that is widely understandable, elegant and memorable.

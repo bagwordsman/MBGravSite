@@ -10,43 +10,15 @@
     </div>
 
     <div class="wrapper">
-
-    {# 1 - loop through pages #}
-    {# page collection defined in frontmatter of 'work' page #}
-    {% for p in page.collection %}
-
-        {# 2 - get thumbnail and content #}
-        {% set pagecontent = p.content|split('<hr />') %}
-        {% set pagesection = pagecontent[0]|split('\n') %}{# split at line break #}
-        {% set thumbnail = pagesection[1]|striptags('<img>') %}{# get thumbnail image (1st item in array) #}
-        {# break into an array #}
-        {% set thumbpart = thumbnail|split('"') %}
-
-        {# 3 - styling - via page meta #}
-        {% set pagemeta = p.header.metadata %}
-
-        {# 4 - compose project thumbnail - with added left or right class #}
-        {% if pagemeta.omitFromWork != 'yes' %}{# may want to omit projects from grid #}
-        <div class="{% if loop.index0 is odd %}half__right{% elseif loop.index0 is even %}half__left{% endif %} thumbnail" style="background-image:url('{% for part in thumbpart %}{% if part|contains('jpg') %}{{ part }}{% endif %}{% endfor %}')">
-            <a class="overlay" href="work/{{ p.slug }}" {# need to avoid hard coding url #} style="background-color:#{{ pagemeta.color }}">
-                {# anchor links must contain text for accessibility purposes #}
-                {% if pagesection[2] or pagesection[3] %}
-                <div class="assistive-text">
-                    <span class="h2">{{ pagesection[2]|striptags }}</span>
-                    <span class="p">{{ pagesection[3]|striptags }}</span>
-                </div>
-                {% endif %}
-            </a>
-            <div class="info{% if pagemeta.inverseThumbnail == 'yes' %} info--inverse{% endif %}">
-                {{ pagesection[2]|replace({'<h1>' : '<h2 class="title">', '<h2>' : '<h2 class="title">', '<h3>' : '<h2 class="title">'}) }}
-                {{ pagesection[3]|replace({'<p>' : '<p class="description">'}) }}
-                <p class="view">View Project</p>
-            </div>
-        </div>
+    {# 1 - loop through pages - collection defined in frontmatter of page #}
+    {% for project in page.collection %}
+        {# may want to omit projects from grid - to make number of projects even #}
+        {% set projectmeta = project.header.metadata %}
+        {% if projectmeta.omitFromWork != 'yes' %}
+            {% include 'partials/dry/projectsquarethumb.html.twig' %}
         {% endif %}
-
     {% endfor %}
+    {# 1 - end page collection loop #}
     </div>
-
 
 {% endblock %}

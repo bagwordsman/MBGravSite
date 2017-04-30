@@ -1,0 +1,67 @@
+{# DRYer code for other project thumbnails - project and about pages #}
+
+{# 1 - match tags and loop through info #}
+{% set tag = columnitems[3]|striptags %}{# a) - 3rd item sets tag (project to be pulled in) #}
+{% for project in taxonomy.findTaxonomy({'tag' : tag }) %}{# b) - match tag in project list to tag in page contents #}
+
+    {# 2 - get thumbnail and content #}
+    {% set projectcontent = project.content|split('<hr />') %}
+    {% set thumb = projectcontent[0]|split('\n') %}{# get 1st section - split at line break #}
+    {% set image = thumb[0]|striptags('<img>') %}{# get image src for wide background-image (1st item in array) #}
+    {% set thumbnail = image|split('"') %}{# split <img> into parts #}
+
+    {# 3 - styling - via project meta #}
+    {% set projectmeta = project.header.metadata %}
+
+    {# ---------------------------- #}
+    {# 4 - compose headline / intro #}
+
+    <div class="wrapper__headline" style="color:#fff;background-color:#{{ projectmeta.color }}">
+        {% if otherprojectintro =='' %}<h2>{{ columnitems[2]|striptags }}</h2>{# if no <h2> in page content, use <h3> #}
+        {% elseif otherprojectintro !='' %}<h3>{{ columnitems[2]|striptags }}</h3>{# else, use <h2> #}
+        {% endif %}
+    </div><!-- wrapper__headline -->
+
+    {# ---------------------------- #}
+    {# 5 - compose thumbnail #}
+    {% if thumbnail %}
+    <div class="wrapper__whole thumbnail" style="background-image:url('{% for item in thumbnail %}{% if item|contains('jpg') %}{{ item }}{% endif %}{% endfor %}'){% if projectmeta.footerThumbnailPosY %};background-position-y:{{projectmeta.footerThumbnailPosY}}%{% endif %}">
+
+        {# a) overlay #}
+        <a class="overlay" href="{{ project.slug }}" style="background-color:#{{ projectmeta.color }}">
+            {# anchor links must contain text for accessibility purposes #}
+            {% if thumb[2] or thumb[3] or thumb[4] %}
+            <div class="assistive-text">
+                {# <h3> or <h4> #}
+                <span class="{% if otherprojectintro =='' %}h3{% else %}h4{% endif %}">
+                    {{ thumb[2]|striptags }}
+                </span>
+                <span class="description">
+                    {% if thumb[4]|length > 30 %}{{ thumb[4]|striptags }}
+                    {% else %}{{ thumb[3]|striptags }}
+                    {% endif %}
+                </span>
+            </div>
+            {% endif %}
+        </a>
+
+        {# b) info #}
+        <div class="info{% if projectmeta.inverseHero == 'yes' %} info--inverse{% endif %}">
+            {# <h3> or <h4> #}
+            {% if otherprojectintro =='' %}<h3 class="title">{{ thumb[2]|striptags }}</h3>
+            {% else %}<h4 class="title">{{ thumb[2]|striptags }}</h4>
+            {% endif %}
+            {# if the longer description is available, use it #}
+            <p class="description">
+                {% if thumb[4]|length > 30 %}{{ thumb[4]|striptags }}
+                {% else %}{{ thumb[3]|striptags }}
+                {% endif %}
+            </p>
+        </div>
+
+    </div>
+    {% endif %}{# endif thumbnail exists #}
+
+
+
+{% endfor %}{# end match tag to project tag #}
