@@ -10,13 +10,18 @@
     {% set image = thumb[0]|striptags('<img>') %}{# get image src for wide background-image (1st item in array) #}
     {% set thumbnail = image|split('"') %}{# split <img> into parts #}
 
-    {# 3 - styling - via project meta #}
+    {# 3 - styling - via project meta and template #}
     {% set projectmeta = project.header.metadata %}
+    {# headline / intro text colour #}
+    {% if project.template == 'work' %}
+        {% set projectheadercolour = '#7f7f7f' %}
+    {% else %}
+        {% set projectheadercolour = '#ffffff' %}
+    {% endif %}
 
     {# ---------------------------- #}
     {# 4 - compose headline / intro #}
-
-    <div class="wrapper__headline" style="color:#fff;background-color:#{{ projectmeta.color }}">
+    <div class="wrapper__headline" style="color:{{ projectheadercolour }};background-color:#{{ projectmeta.color }}">
         {% if otherprojectintro =='' %}<h2>{{ columnitems[2]|striptags }}</h2>{# if no <h2> in page content, use <h3> #}
         {% elseif otherprojectintro !='' %}<h3>{{ columnitems[2]|striptags }}</h3>{# else, use <h2> #}
         {% endif %}
