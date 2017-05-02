@@ -10,8 +10,8 @@
     {% include 'partials/metadata.html.twig' %}
 
     <link rel="icon" type="image/x-icon" href="{{ url('theme://images/assets/mb-icon.ico') }}" rel="Shortcut Icon"/>
-    <link href="img/assets/Apple-Touch-Icon-57x57.png" rel="Apple Touch Icon">
-    <link href="img/assets/Apple-Touch-Icon-144x144.png" rel="Apple Touch Icon">
+    <link href="{{ url('theme://images/assets/Apple-Touch-Icon-57x57.png') }}" rel="Apple Touch Icon">
+    <link href="{{ url('theme://images/assets/Apple-Touch-Icon-144x144.png') }}" rel="Apple Touch Icon">
     <link rel="canonical" href="{{ page.url(true, true) }}" />
 
     {% block stylesheets %}

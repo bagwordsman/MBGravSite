@@ -71,7 +71,7 @@ function init() {
 // 1. mesh
 function initMesh() {
     var loader = new THREE.JSONLoader();
-	loader.load('/MB-design-grav/user/themes/mb-design/js/small-card_7.js', modelLoadedCallback);	
+	loader.load('../../user/themes/mb-design/js/small-card_7.js', modelLoadedCallback);
 } // end initMesh
 
 // 2. camera
