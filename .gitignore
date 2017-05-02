@@ -1,7 +1,7 @@
 # .gitignore for the user folder only
 # Grav Specific
 data/*
- 
+config/system.yaml 
 # OS Generated
 .DS_Store*
 ehthumbs.db
