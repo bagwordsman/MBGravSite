@@ -1,7 +1,7 @@
 # MBGravSite
 ## Portfolio Website Project - made with Grav
 ### Future tweaks, features and improvements will include:
-1 - <strikethrough>DRYer twig code - less repetition in functions</strikethrough>
+1 - ~~DRYer twig code - less repetition in functions~~
 
 2 - Add sizes to image `html` automatically - prevent 'jumping' when page loads
 
