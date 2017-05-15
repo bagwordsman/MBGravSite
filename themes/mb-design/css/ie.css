@@ -15,7 +15,9 @@ padding and spacing
 14rem = 220px
 8rem = 126px
 4rem = 63px
+3rem = 47px
 2.5rem = 39px
+2rem = 32px
 */
 
 
@@ -31,35 +33,35 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 .featured, .content img + p{font-size:20px;}
 
 /* b) header menu */
-#header__menu .item--home{width:50%;}
+#header__menu .item--home{width:50%;text-align:left;}
 #header__menu .item--work,
-#header__menu .item--about{width:25%;}
+#header__menu .item--about{width:25%;text-align:center;}
 #header__menu a{padding:16px 0;}
 /* home item */
-#header__menu .item--home a{text-indent:126px;color:#fff;;background-image:url('../images/assets/Apple-Touch-Icon-144x144.png');}
+#header__menu .item--home a{text-indent:126px;color:#ee1d3a;background-image:none;}
 #header__menu .item--home a:hover,
 #header__menu .item--home a:focus,
-#header__menu .item--home a:active{background-color:#ee1d3a;background-position:126px center;}
+#header__menu .item--home a:active{background-color:#ee1d3a;color:#fff;background-position:126px center;}
 
 /* c) whole and half */
 .half__centered,
-.wrapper__whole,
 .hero__info,
 .wrapper__headline,
 #footer__menu,
 .wrapper__footer{padding-left:126px;padding-right:126px;}
-/* half */
-.half__left,
-.half__right{width:50%;float:left;}
-.half__right{text-align:right;}
-/* half - padding */
-.half__left,
+
+/* half left */
+.half__left{width:50%;float:left;padding:39px 32px 47px 126px;}
 .half__left.content{padding-left:126px;}
-.half__right,
+/* half right */
+.half__right{width:50%;float:left;text-align:right;padding:39px 126px 47px 32px;}
 .half__right.content{padding-right:126px;}
-/* half-ish */
+
+/* centered stuff */
+.half__centered{margin:0 auto;padding:0;}
 .half__centered,
 .headline--centered{width:50%;}
+.wrapper__whole{padding:126px 32px 126px;}
 
 /* d) text */
 .headline--centered,
@@ -73,8 +75,8 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 .content ul{padding:0 39px;}
 
 /* e) footer */
-#footer__menu{padding:39px 32px;}
-.wrapper__footer{padding:16px 32px;}
+#footer__menu{padding:39px 126px;}
+.wrapper__footer{padding:16px 126px;}
 
 
 /* - - - - - - - - - - */
@@ -86,6 +88,13 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 /* 2. work page */
 .half__left.thumbnail,
 .half__right.thumbnail{max-height:720px;}
+/* thumbnail images:hover */
+.thumbnail .overlay:hover,
+.thumbnail .overlay:focus,
+.thumbnail .overlay:active{opacity:.75;}
+/* text effects */
+.thumbnail .overlay + .info{z-index:4;}
+
 
 /* 3. project pages */
 .hero__info h1{font-size:40px;}
