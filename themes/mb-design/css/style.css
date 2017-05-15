@@ -196,7 +196,7 @@ a:active{outline:none;}
 .description{}
 /* e) view */
 .view{text-shadow:none;text-transform:uppercase;letter-spacing:.1em;transition:letter-spacing ease-in-out .25s;margin-top:.25em;}
-.view:after{content:" ❯";}
+.view:after{content:"\00a0\276f";}
 /* thumbnail images:hover */
 .thumbnail .overlay:hover,
 .thumbnail .overlay:focus,
@@ -248,8 +248,9 @@ a:active{outline:none;}
 #project-nav li{display:table-cell;width:50%;width:50vw;overflow:hidden;}
 #project-nav a{display:block;box-sizing:border-box;transition:all ease-in-out .25s;padding:.5rem 2rem;font-size:1.5em;font-size:4.25vw;}
 #project-nav .next{text-align:right;}
-#project-nav .prev a:before{content:"❮ ";}
-#project-nav .next a:after{content:" ❯";}
+#project-nav .prev a:before{content:"\276e\00a0";}
+#project-nav .next a:after{content:"\00a0\276f";}
+
 /* hover styles */
 #project-nav a:hover,
 #project-nav a:focus,
@@ -471,8 +472,7 @@ a:active{outline:none;}
 	#project-nav .prev a:hover{padding-left:2rem;}
 	#project-nav .next a:hover{padding-right:2rem;}
 	#project-nav .prev a:after{content:"ious Project";}
-	#project-nav .next a:after{content:" Project ❯";}
-
+	#project-nav .next a:after{content:" Project\00a0\276f";}
 
 	/* - - - - - - - - */
 	/* Tom Hudson - th.css edited at this size */

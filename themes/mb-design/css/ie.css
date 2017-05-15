@@ -30,11 +30,16 @@ padding and spacing
 h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 .featured, .content img + p{font-size:20px;}
 
-/* b) logo */
-#header__menu .item--home a{text-indent:220px;}
+/* b) header menu */
+#header__menu .item--home{width:50%;}
+#header__menu .item--work,
+#header__menu .item--about{width:25%;}
+#header__menu a{padding:16px 0;}
+/* home item */
+#header__menu .item--home a{text-indent:126px;color:#fff;;background-image:url('../images/assets/Apple-Touch-Icon-144x144.png');}
 #header__menu .item--home a:hover,
 #header__menu .item--home a:focus,
-#header__menu .item--home a:active{background-position:126px center;}
+#header__menu .item--home a:active{background-color:#ee1d3a;background-position:126px center;}
 
 /* c) whole and half */
 .half__centered,
@@ -44,6 +49,10 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 #footer__menu,
 .wrapper__footer{padding-left:126px;padding-right:126px;}
 /* half */
+.half__left,
+.half__right{width:50%;float:left;}
+.half__right{text-align:right;}
+/* half - padding */
 .half__left,
 .half__left.content{padding-left:126px;}
 .half__right,
@@ -63,6 +72,10 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 .content p,
 .content ul{padding:0 39px;}
 
+/* e) footer */
+#footer__menu{padding:39px 32px;}
+.wrapper__footer{padding:16px 32px;}
+
 
 /* - - - - - - - - - - */
 /* 1. home */
@@ -78,9 +91,10 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 .hero__info h1{font-size:40px;}
 .hero__info p{font-size:32px;}
 /* project nav */
+#project-nav .next{text-align:right;}
 #project-nav .prev a{padding-left:126px;}
 #project-nav .next a{padding-right:126px;}
 #project-nav .prev a:hover{padding-left:63px;}
 #project-nav .next a:hover{padding-right:63px;}
 #project-nav .prev a:after{content:"ious Project";}
-#project-nav .next a:after{content:" Project ❯";}
+#project-nav .next a:after{content:" Project\00a0\276f";}
