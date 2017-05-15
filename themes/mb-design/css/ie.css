@@ -1,0 +1,86 @@
+@charset "UTF-8";
+/* CSS Document */
+/* for the poor deprived souls who still use ie8 and below */
+
+/*
+font sizes
+
+2.5em = 40px = project h1
+2em = 32px = menu item, wrapper__headline h1, p.lg, .title
+1.6em = 26px = h5, h6, p, #project-nav a, #footer__menu a, #demo p
+1.4em = 22px = #views .button
+1.25em = 20px = .featured
+
+padding and spacing
+14rem = 220px
+8rem = 126px
+4rem = 63px
+2.5rem = 39px
+*/
+
+
+/* - - - - - - - - - - */
+/* all pages */
+
+/* a) text */
+#header__menu a, h1, h2, h3, h4, p.lg,
+.wrapper__headline h1,
+.wrapper__headline h2,
+.wrapper__headline h3{font-size:32px;}
+h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
+.featured, .content img + p{font-size:20px;}
+
+/* b) logo */
+#header__menu .item--home a{text-indent:220px;}
+#header__menu .item--home a:hover,
+#header__menu .item--home a:focus,
+#header__menu .item--home a:active{background-position:126px center;}
+
+/* c) whole and half */
+.half__centered,
+.wrapper__whole,
+.hero__info,
+.wrapper__headline,
+#footer__menu,
+.wrapper__footer{padding-left:126px;padding-right:126px;}
+/* half */
+.half__left,
+.half__left.content{padding-left:126px;}
+.half__right,
+.half__right.content{padding-right:126px;}
+/* half-ish */
+.half__centered,
+.headline--centered{width:50%;}
+
+/* d) text */
+.headline--centered,
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6,
+.content p,
+.content ul{padding:0 39px;}
+
+
+/* - - - - - - - - - - */
+/* 1. home */
+.wrapper.vh,
+.half__right.thumbnail.thumbnail--featured{min-height:512px;max-height:720px;}
+.wrapper__whole.thumbnail{height:256px;}
+
+/* 2. work page */
+.half__left.thumbnail,
+.half__right.thumbnail{max-height:720px;}
+
+/* 3. project pages */
+.hero__info h1{font-size:40px;}
+.hero__info p{font-size:32px;}
+/* project nav */
+#project-nav .prev a{padding-left:126px;}
+#project-nav .next a{padding-right:126px;}
+#project-nav .prev a:hover{padding-left:63px;}
+#project-nav .next a:hover{padding-right:63px;}
+#project-nav .prev a:after{content:"ious Project";}
+#project-nav .next a:after{content:" Project ❯";}

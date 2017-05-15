@@ -1,0 +1,25 @@
+@charset "UTF-8";
+/* CSS Document */
+/* print css */
+/* - - - - - - - - - - */
+@media print {
+
+body {background:white;color:black;margin:0;}
+
+/* a) text */
+#header__menu a, h1, h2, h3, h4, p.lg,
+.wrapper__headline h1,
+.wrapper__headline h2,
+.wrapper__headline h3{font-size:16pt;}
+h5, h6, p, #project-nav a, #footer__menu a{font-size:13pt;}
+.featured, .content img + p{font-size:10pt;}
+.hero__info h1{font-size:20pt;}
+.hero__info p{font-size:16pt;}
+
+/* b) reset text styles
+.thumbnail .overlay:hover + .info,
+.thumbnail .overlay:hover + .info--inverse{text-shadow:none;}
+*/
+
+
+}

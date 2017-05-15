@@ -23,6 +23,12 @@
     {% block stylesheets %}
         {% do assets.addCss('theme://css/style.css', 100) %}
         {% do assets.addCss('theme://css/th.css', 99) %}
+        {% do assets.addCss('https://fonts.googleapis.com/css?family=Signika+Negative:400,600', 98) %}
+        {% do assets.addCss('theme://css/print.css', {'media':'print'}, 98) %}
+        {# no media queries #}
+        {% if browser.getBrowser == 'msie' and browser.getVersion <= 8 %}
+            {% do assets.addCss('theme://css/ie.css', 96) %}
+        {% endif %}
     {% endblock %}
     {{ assets.css() }}
 
