@@ -6,7 +6,7 @@
 
 body {background:white;color:#4d4d4d;margin:0;}
 
-/* a) text */
+/* text */
 #header__menu a, h1, h2, h3, h4, p.lg,
 .wrapper__headline h1,
 .wrapper__headline h2,
@@ -15,49 +15,72 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:13pt;}
 .featured, .content img + p{font-size:10pt;}
 .hero__info h1{font-size:20pt;}
 .hero__info p{font-size:16pt;}
-
-/* b) half whole, centered and headline */
-.half__left,
-.half__right,
-.half__centered,
-.wrapper__whole{padding:0;}
-.wrapper__headline{margin:0;padding-left:0;padding-right:0;text-align:left;}
-
-
-/* c) thumbnails */
-.half__left.thumbnail,
-.half__right.thumbnail{display:inline-block;width:40%;margin-right:5%;min-height:0;height:auto;}
-.half__left.thumbnail{border-right:.05cm solid #4d4d4d;}
-
+/* links */
+.content a:after{content:" (" attr(href) ") ";font-size:13pt;font-weight:normal;color:#ee1d3a;}
+/* image + caption */
+.content img{display:block;max-width:8.75cm;margin:0 auto;margin-bottom:.5cm;}
+.content img + p{display:block;text-align:center;margin-top:-.25cm;font-size:9pt;}
+/* inverse text - gets reset back for hero images */
+.info--inverse,
+.info--inverse .view{color:#4d4d4d;text-shadow:none;}
+/* subheading */
+.content h2,
+.content h2 + p{text-align:center;}
 
 /* ----------------- */
 /* remove the local/test location bar */
 body > .wrapper__headline{display:none;}
 
 /* header */
-#header__menu .item--home{display:block;}
-#header__menu .item--home:before{content:'Martin Bagshaw Graphic \0026 Web Design';}
-#header__menu .item--home a:before{content:url('../images/assets/ie_hexagon-red.png');}
+#header__menu{display:block;text-align:left;}
+#header__menu a{background-image:none;height:auto;margin:0;padding:0;}
 #header__menu .item--work,
 #header__menu .item--about{display:none;}
+#header__menu .item--home{display:block;width:100%;}
+#header__menu .item--home:before{display:block;width:100%;content:'Graphic\00a0\0026\00a0Web Design Portfolio Website of Martin Bagshaw';font-size:13pt;text-align:center;}
+
+/* content */
+/* a) half whole, centered */
+.half__left,
+.half__right{display:inline-block;vertical-align:top;padding:0;width:45%;margin-left:5%;min-height:0;height:auto;}
+.half__left{margin-left:0;}
+.half__right{text-align:right;}
+.half__centered,
+.wrapper__whole{padding:0;}
+
+/* b) thumbnails */
+.half__left.thumbnail,
+.half__right.thumbnail{min-height:0;height:auto;margin-top:.5cm;padding:.5cm 0;border-bottom:.025cm solid #4d4d4d;}
+.half__left.thumbnail{border-right:.025cm solid #4d4d4d;}
+.half__right.thumbnail{border-left:.025cm solid #4d4d4d;}
+
+/* c) headline */
+.wrapper__headline{margin:.5cm 0;padding-left:0;padding-right:0;text-align:left;}
+.wrapper__headline .headline--centered{text-align:center;}
+
 
 /* footer */
 #footer__menu{display:none;}
 .wrapper__footer{border-top:1px solid #7f7f7f;margin-top:.5cm;padding-left:0;padding-right:0;}
 
+
+
 /* ----------------- */
 /* home page */
 .wrapper.vh .half__right.thumbnail{margin-top:.5cm;}
-#secondary{margin:1cm 0;border-top:.05cm solid #4d4d4d;border-bottom:.05cm solid #4d4d4d;}
+#secondary{margin:1cm 0 0;border-top:.05cm solid #4d4d4d;border-bottom:.05cm solid #4d4d4d;}
 #secondary .wrapper__whole.thumbnail{margin:.5cm 0;}
 
 /* project pages */
 #project-nav{display:none;}
-.info--inverse,
-.info--inverse .view{color:#4d4d4d;text-shadow:none;}
-/* remove thumbnail and title */
-.content > .wrapper ~ .wrapper__headline,
-.content > .wrapper ~ .wrapper__whole.thumbnail{display:none;}
+.hero__info{text-shadow:none;}
+.hero .info--inverse .title,
+.hero .info--inverse .description{color:white;background:black;text-shadow:-.05cm -.05cm 0 #4d4d4d, .05cm -.05cm 0 #4d4d4d, -.05cm .05cm 0 #4d4d4d, .05cm .05cm 0 #4d4d4d;}
+
+/* remove linked other project thumbnail and title - also applies to about page */
+#content > .wrapper__headline ~ .wrapper__headline, /* about page bit */
+#content > .wrapper ~ .wrapper__headline,
+#content > .wrapper__headline ~ .wrapper__whole.thumbnail{display:none;}
 
 /* Tom Hudson page */
 .content iframe{display:none;}
