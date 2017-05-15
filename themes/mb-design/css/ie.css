@@ -33,6 +33,7 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 .featured, .content img + p{font-size:20px;}
 
 /* b) header menu */
+#header__menu{width:100%;}
 #header__menu .item--home{width:50%;text-align:left;}
 #header__menu .item--work,
 #header__menu .item--about{width:25%;text-align:center;}
@@ -61,7 +62,7 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 .half__centered{margin:0 auto;padding:0;}
 .half__centered,
 .headline--centered{width:50%;}
-.wrapper__whole{padding:126px 32px 126px;}
+.wrapper__whole{padding:32px 126px;}
 
 /* d) text */
 .headline--centered,
@@ -95,7 +96,6 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 /* text effects */
 .thumbnail .overlay + .info{z-index:4;}
 
-
 /* 3. project pages */
 .hero__info h1{font-size:40px;}
 .hero__info p{font-size:32px;}
@@ -107,3 +107,10 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 #project-nav .next a:hover{padding-right:63px;}
 #project-nav .prev a:after{content:"ious Project";}
 #project-nav .next a:after{content:" Project\00a0\276f";}
+
+/* 1. home */
+/* some trickery to make the work text visible on the home page */
+/* a) reset the colour to white */
+.wrapper__whole.thumbnail .overlay + .info{color:#fff;}
+/* b) reset the first child back to grey */
+.wrapper__whole.thumbnail:first-child .overlay + .info{color:#4d4d4d;}
