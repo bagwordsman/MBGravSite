@@ -120,7 +120,7 @@ a:active{outline:none;}
 
 /* - - - - - - - - - - */
 /* content */
-.wrapper{display:block;box-sizing:border-box;}
+.wrapper{display:block;box-sizing:border-box;width:100%;width:100vw;}/* required by IE edge */
 .wrapper:after{display:block;content:"";clear:both;visibility:hidden;}
 
 /* whole */
@@ -329,7 +329,6 @@ p.notopmargin{margin-top:0;}
 	#header__menu .item--home a:active{background-image:url('../images/assets/hexagon-white_lg.svg');/* svg with no empty space for left alignment */background-position:2rem center;color:#fff;}
 
 	/* - - - - - - - - - - */
-	.wrapper{width:100vw;}/* required by IE edge */
 	/* half */
 	.half__left,
 	.half__right{width:50%;width:50vw;float:left;}
@@ -350,7 +349,7 @@ p.notopmargin{margin-top:0;}
 
 	/* - - - - - - - - - - */
 	/* 1. home */
-	.wrapper.vh{position:relative;overflow:hidden;height:calc(100vh - 7.5em);}/* this is why you don't use ems! - they never add up */
+	.wrapper.vh{position:relative;overflow:hidden;width:100%;height:calc(100vh - 7.5em);}/* this is why you don't use ems! - they never add up */
 	.half__right.thumbnail.thumbnail--featured{position:absolute;top:0;bottom:0;right:0;height:100%;max-height:100%;}
 	/* headline and menu item
 	height:calc(100vh - 1.25em - .7em - 1.45em - 2em) = 5.4em
