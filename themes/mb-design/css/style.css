@@ -120,7 +120,7 @@ a:active{outline:none;}
 
 /* - - - - - - - - - - */
 /* content */
-.wrapper{display:block;box-sizing:border-box;width:100%;width:100vw;}/* required by IE edge */
+.wrapper{display:block;box-sizing:border-box;width:100%;}/* width:100vw; required by IE edge */
 .wrapper:after{display:block;content:"";clear:both;visibility:hidden;}
 
 /* whole */
@@ -155,26 +155,6 @@ a:active{outline:none;}
 .content h6,
 .content p,
 .content ul{text-align:justify;margin:1em 0;padding:0 2rem;}
-
-/* old classes - override above text styles
- - removed old .caption class (at top of css)
- - border class is still there
-
-h2.nomargin,
-h3.nomargin,
-p.nomargin{margin:0;}
-h2.notopmargin,
-h3.notopmargin,
-p.notopmargin{margin-top:0;}
-
-.content a{text-decoration:underline;}
-.content .lg{text-align:center;}/* phone and email
-.content img{width:100%;margin-bottom:1rem;}
-.content img + .caption{margin-top:-0.5em;}
-
-.caption{color:#a0a0a0;margin-top:1em;font-size:1em;font-size:3.5vw;}
-.caption:before{content:"- ";}
-*/
 
 /* text formatting */
 .content a{text-decoration:underline;}
@@ -331,13 +311,13 @@ p.notopmargin{margin-top:0;}
 	/* - - - - - - - - - - */
 	/* half */
 	.half__left,
-	.half__right{width:50%;width:50vw;float:left;}
+	.half__right{width:50%;float:left;}/* width:50vw; */
 	.half__right{text-align:right;}
 	.half__left.content{padding-left:2rem;padding-right:1rem;}
 	.half__right.content{padding-left:1rem;padding-right:2rem;}
 	/* thumbnail images */
 	.half__left.thumbnail,
-	.half__right.thumbnail{width:50vw;height:50vw;max-height:430px;}/* next breakpoint: 860/2 */
+	.half__right.thumbnail{width:50%;height:50vw;max-height:430px;}/* width:50vw; - next breakpoint: 860/2 */
 	/* half-ish */
 	.half__centered{width:65%;width:65vw;margin:0 auto;}
 	.headline--centered{width:65%;width:65vw;margin:0 auto;padding:0 2rem;box-sizing:border-box;} /* new selector for larger sizes - centred headline on about page */
