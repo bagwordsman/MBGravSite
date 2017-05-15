@@ -61,9 +61,8 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 .half__right.content{padding-right:126px;}
 
 /* centered stuff */
-.half__centered{margin:0 auto;padding:0;}
-.half__centered,
-.headline--centered{width:50%;}
+.headline--centered{width:50%;margin:0 auto;}/* just about page */
+.half__centered{width:50%;margin:0 auto;padding:0;}
 .wrapper__whole{padding:32px 126px;}
 
 /* d) text */
