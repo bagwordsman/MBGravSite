@@ -39,10 +39,12 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 #header__menu .item--about{width:25%;text-align:center;}
 #header__menu a{padding:16px 0;}
 /* home item */
-#header__menu .item--home a{text-indent:126px;color:#ee1d3a;background-image:none;}
+#header__menu .item--home a{text-indent:226px;color:#ee1d3a;background-image:url('../images/assets/ie_hexagon-red.png');background-size:auto 50%;background-position:126px center;}
+
+/* #header__menu .item--home a{text-indent:126px;color:#ee1d3a;background-image:none;} */
 #header__menu .item--home a:hover,
 #header__menu .item--home a:focus,
-#header__menu .item--home a:active{background-color:#ee1d3a;color:#fff;background-position:126px center;}
+#header__menu .item--home a:active{background-image:url('../images/assets/ie_hexagon-white.png');background-color:#ee1d3a;color:#fff;background-position:126px center;}
 
 /* c) whole and half */
 .half__centered,
@@ -83,7 +85,7 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 /* - - - - - - - - - - */
 /* 1. home */
 .wrapper.vh,
-.half__right.thumbnail.thumbnail--featured{min-height:512px;max-height:720px;}
+.wrapper.vh .half__right.thumbnail{min-height:512px;max-height:720px;}
 .wrapper__whole.thumbnail{height:256px;}
 
 /* 2. work page */
