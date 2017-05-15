@@ -18,6 +18,7 @@ padding and spacing
 3rem = 47px
 2.5rem = 39px
 2rem = 32px
+1rem = 16px
 */
 
 
@@ -55,17 +56,17 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 
 /* half left */
 .half__left{width:50%;float:left;padding:39px 32px 47px 126px;}
-.half__left.content{padding-left:126px;}
+.half__left.content{padding-left:126px;padding-right:16px;}
 /* half right */
 .half__right{width:50%;float:left;text-align:right;padding:39px 126px 47px 32px;}
-.half__right.content{padding-right:126px;}
+.half__right.content{padding-right:126px;padding-left:16px;}
 
 /* centered stuff */
-.headline--centered{width:50%;margin:0 auto;}/* just about page */
+.headline--centered{width:50%;margin:0 auto;padding-left:0;}/* just about page */
 .half__centered{width:50%;margin:0 auto;padding:0;}
 .wrapper__whole{padding:32px 126px;}
 
-/* d) text */
+/* d) text and image */
 .headline--centered,
 .content h1,
 .content h2,
@@ -75,6 +76,8 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 .content h6,
 .content p,
 .content ul{padding:0 39px;}
+.content img{margin-bottom:16px;}
+.content img + p{margin-top:-8px};
 
 /* e) footer */
 #footer__menu{padding:39px 126px;}
@@ -98,9 +101,12 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 .thumbnail .overlay + .info{z-index:4;}
 
 /* 3. project pages */
+.hero__info{padding-top:32px;padding-bottom:32px;}
 .hero__info h1{font-size:40px;}
 .hero__info p{font-size:32px;}
 /* project nav */
+#project-nav {width:100%;}
+#project-nav li{width:50%;}
 #project-nav .next{text-align:right;}
 #project-nav .prev a{padding-left:126px;}
 #project-nav .next a{padding-right:126px;}
@@ -109,8 +115,11 @@ h5, h6, p, #project-nav a, #footer__menu a{font-size:26px;}
 #project-nav .prev a:after{content:"ious Project";}
 #project-nav .next a:after{content:" Project\00a0\276f";}
 
+
+
 /* 1. home */
 /* some trickery to make the work text visible on the home page */
+/* note: needs to be after other thumbnail stuff in the cascasde */
 /* a) reset the colour to white */
 .wrapper__whole.thumbnail .overlay + .info{color:#fff;}
 /* b) reset the first child back to grey */
