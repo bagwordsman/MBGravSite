@@ -4,22 +4,62 @@
 /* - - - - - - - - - - */
 @media print {
 
-body {background:white;color:black;margin:0;}
+body {background:white;color:#4d4d4d;margin:0;}
 
 /* a) text */
 #header__menu a, h1, h2, h3, h4, p.lg,
 .wrapper__headline h1,
 .wrapper__headline h2,
-.wrapper__headline h3{font-size:16pt;}
+.wrapper__headline h3{font-size:16pt;padding:0;}
 h5, h6, p, #project-nav a, #footer__menu a{font-size:13pt;}
 .featured, .content img + p{font-size:10pt;}
 .hero__info h1{font-size:20pt;}
 .hero__info p{font-size:16pt;}
 
-/* b) reset text styles
-.thumbnail .overlay:hover + .info,
-.thumbnail .overlay:hover + .info--inverse{text-shadow:none;}
-*/
+/* b) half whole, centered and headline */
+.half__left,
+.half__right,
+.half__centered,
+.wrapper__whole{padding:0;}
+.wrapper__headline{margin:0;padding-left:0;padding-right:0;text-align:left;}
 
+
+/* c) thumbnails */
+.half__left.thumbnail,
+.half__right.thumbnail{display:inline-block;width:40%;margin-right:5%;min-height:0;height:auto;}
+.half__left.thumbnail{border-right:.05cm solid #4d4d4d;}
+
+
+/* ----------------- */
+/* remove the local/test location bar */
+body > .wrapper__headline{display:none;}
+
+/* header */
+#header__menu .item--home{display:block;}
+#header__menu .item--home:before{content:'Martin Bagshaw Graphic \0026 Web Design';}
+#header__menu .item--home a:before{content:url('../images/assets/ie_hexagon-red.png');}
+#header__menu .item--work,
+#header__menu .item--about{display:none;}
+
+/* footer */
+#footer__menu{display:none;}
+.wrapper__footer{border-top:1px solid #7f7f7f;margin-top:.5cm;padding-left:0;padding-right:0;}
+
+/* ----------------- */
+/* home page */
+.wrapper.vh .half__right.thumbnail{margin-top:.5cm;}
+#secondary{margin:1cm 0;border-top:.05cm solid #4d4d4d;border-bottom:.05cm solid #4d4d4d;}
+#secondary .wrapper__whole.thumbnail{margin:.5cm 0;}
+
+/* project pages */
+#project-nav{display:none;}
+.info--inverse,
+.info--inverse .view{color:#4d4d4d;text-shadow:none;}
+/* remove thumbnail and title */
+.content > .wrapper ~ .wrapper__headline,
+.content > .wrapper ~ .wrapper__whole.thumbnail{display:none;}
+
+/* Tom Hudson page */
+.content iframe{display:none;}
 
 }
